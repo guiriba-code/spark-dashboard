@@ -1,54 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
+/* ============================================================
+   CRT / WIN95 DARK THEME
+   ============================================================ */
+
 @theme {
-  --color-base: #0e0e12;
-  --color-card: #16161d;
-  --color-card-hover: #1e1e28;
-  --color-border: #2a2a35;
-  --color-border-light: #3a3a48;
-  --color-text: #e8e8f0;
-  --color-muted: #6b6b80;
-  --color-muted-light: #9494a8;
-  --color-red: #ef4444;
-  --color-red-bg: #3f1212;
-  --color-yellow: #f59e0b;
-  --color-yellow-bg: #3f2d0a;
-  --color-green: #22c55e;
-  --color-green-bg: #0d2e1a;
-  --color-accent: #6366f1;
-  --color-accent-bg: #1e1f3a;
+  --color-base:         #0a0a10;
+  --color-surface:      #0f0f1e;
+  --color-surface2:     #14142a;
+  --color-border:       #1a1a3a;
+  --color-border-light: #2a2a55;
+  --color-text:         #e0e0ff;
+  --color-muted:        #9090c0;
+  --color-muted-light:  #b0b0d8;
+  --color-red:          #ff3333;
+  --color-red-bg:       #2a0000;
+  --color-yellow:       #ffcc00;
+  --color-yellow-bg:    #2a1a00;
+  --color-green:        #00ff41;
+  --color-green-bg:     #002200;
+  --color-cyan:         #00ccff;
+  --color-accent:       #4040ff;
+  --color-accent-bg:    #0a0a30;
+  --color-win-title:    #000080;
+  --color-win-gray:     #c0c0c0;
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+* { box-sizing: border-box; }
 
 body {
-  background-color: var(--color-base);
-  color: var(--color-text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0a0a10;
+  color: #e0e0ff;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, Arial, sans-serif;
+  font-size: 13px;
   margin: 0;
   padding: 0;
+  /* CRT scanlines overlay */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.07) 2px,
+      rgba(0, 0, 0, 0.07) 4px
+    );
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 0;
 }
-::-webkit-scrollbar-track {
-  background: var(--color-base);
+
+code, .font-mono, .tabular-nums {
+  font-family: 'Courier New', Courier, monospace;
 }
+
+/* ============================================================
+   WIN95 WINDOW COMPONENTS
+   ============================================================ */
+
+.win95-window {
+  border-top:    2px solid #dfdfdf;
+  border-left:   2px solid #dfdfdf;
+  border-right:  2px solid #404040;
+  border-bottom: 2px solid #404040;
+  background: #0f0f1e;
+  box-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
+}
+
+.win95-window-inset {
+  border-top:    2px solid #404040;
+  border-left:   2px solid #404040;
+  border-right:  2px solid #dfdfdf;
+  border-bottom: 2px solid #dfdfdf;
+  background: #070710;
+}
+
+.win95-titlebar {
+  background: linear-gradient(90deg, #000080 0%, #1060c8 100%);
+  padding: 3px 4px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.win95-titlebar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 12px;
+  background: #c0c0c0;
+  color: #000;
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  font-weight: bold;
+  border-top:    1px solid #ffffff;
+  border-left:   1px solid #ffffff;
+  border-right:  1px solid #404040;
+  border-bottom: 1px solid #404040;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.win95-titlebar-btn:active {
+  border-top:    1px solid #404040;
+  border-left:   1px solid #404040;
+  border-right:  1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.win95-btn {
+  background: #c0c0c0;
+  color: #000000;
+  font-family: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-top:    1px solid #ffffff;
+  border-left:   1px solid #ffffff;
+  border-right:  1px solid #404040;
+  border-bottom: 1px solid #404040;
+  cursor: pointer;
+  outline: none;
+}
+
+.win95-btn:active,
+.win95-btn.active {
+  border-top:    1px solid #404040;
+  border-left:   1px solid #404040;
+  border-right:  1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 4px 9px 2px 11px;
+}
+
+/* ============================================================
+   SCROLLBARS (CRT style)
+   ============================================================ */
+
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0a0a10; border-left: 1px solid #1a1a3a; }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-light);
-  border-radius: 3px;
+  background: #2a2a55;
+  border: 1px solid #4040ff;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+::-webkit-scrollbar-thumb:hover { background: #4040ff; }
+::-webkit-scrollbar-corner { background: #0a0a10; }
+
+/* ============================================================
+   SCORE BADGES (updated for contrast)
+   ============================================================ */
+
+.score-red    { background: #2a0000; color: #ff3333; border: 1px solid #ff333340; }
+.score-yellow { background: #2a1a00; color: #ffcc00; border: 1px solid #ffcc0040; }
+.score-green  { background: #002200; color: #00ff41; border: 1px solid #00ff4140; }
+
+/* ============================================================
+   REACT FLOW OVERRIDES
+   ============================================================ */
+
+.react-flow {
+  background: #0a0a10 !important;
 }
 
 .react-flow__background {
-  background-color: var(--color-base) !important;
+  background-color: #0a0a10 !important;
 }
+
+.react-flow__background-pattern {
+  color: #1a1a3a !important;
+}
+
+.react-flow__controls {
+  background: #0f0f1e !important;
+  border: 2px solid #1a1a3a !important;
+  border-radius: 0 !important;
+  box-shadow: 2px 2px 0 #000 !important;
+}
+
+.react-flow__controls-button {
+  background: #0f0f1e !important;
+  color: #9090c0 !important;
+  border-bottom: 1px solid #1a1a3a !important;
+  fill: #9090c0 !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #14142a !important;
+  color: #e0e0ff !important;
+  fill: #e0e0ff !important;
+}
+
+.react-flow__minimap {
+  background: #0f0f1e !important;
+  border: 2px solid #1a1a3a !important;
+  border-radius: 0 !important;
+}
+
 .react-flow__edge-path {
-  stroke: var(--color-border-light) !important;
+  stroke: #2a2a55 !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: #4040ff !important;
+  stroke-dasharray: 5 3;
+}
+
+.react-flow__handle {
+  background: #4040ff !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 0 !important;
+  border: 1px solid #8080ff !important;
+}
+
+/* ============================================================
+   GLITCH / CRT CURSOR BLINK
+   ============================================================ */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: #00ff41;
+  margin-left: 2px;
+}
+
+/* ============================================================
+   TAB NAVIGATION (Win95 tabs)
+   ============================================================ */
+
+.tab-active {
+  background: #0f0f1e;
+  border-top:   2px solid #dfdfdf;
+  border-left:  2px solid #dfdfdf;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #0f0f1e;
+  color: #e0e0ff;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-inactive {
+  background: #070710;
+  border-top:   2px solid #808080;
+  border-left:  2px solid #808080;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  color: #9090c0;
+}
+
+.tab-inactive:hover {
+  color: #b0b0d8;
+  background: #0a0a18;
 }

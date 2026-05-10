@@ -10,16 +10,31 @@ interface FunctionRowProps {
   showImpact?: boolean
 }
 
-const statusBadge = (value: 'Sim' | 'Não' | 'Parcial' | 'N/A', label: string) => {
-  const colorMap = {
-    'Sim': 'bg-[#0d2e1a] text-[#22c55e] border-[#22c55e]/30',
-    'Não': 'bg-[#3f1212] text-[#ef4444] border-[#ef4444]/30',
-    'Parcial': 'bg-[#3f2d0a] text-[#f59e0b] border-[#f59e0b]/30',
-    'N/A': 'bg-[#1a1a22] text-[#6b6b80] border-[#2a2a35]',
+type StatusVal = 'Sim' | 'Não' | 'Parcial' | 'N/A'
+
+function StatusBadge({ value, label }: { value: StatusVal; label: string }) {
+  const colorMap: Record<StatusVal, { bg: string; text: string; border: string }> = {
+    'Sim':    { bg: '#002200', text: '#00ff41', border: '#00ff4140' },
+    'Não':    { bg: '#2a0000', text: '#ff3333', border: '#ff333340' },
+    'Parcial':{ bg: '#2a1a00', text: '#ffcc00', border: '#ffcc0040' },
+    'N/A':    { bg: '#0a0a1a', text: '#9090c0', border: '#2a2a55'  },
   }
+  const s = colorMap[value]
   return (
-    <span className={`inline-flex items-center gap-1 text-xs px-1.5 py-0.5 rounded border font-medium ${colorMap[value]}`}>
-      {label}: {value}
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        fontFamily: "'Courier New', Courier, monospace",
+        fontSize: 9,
+        padding: '1px 5px',
+        background: s.bg,
+        color: s.text,
+        border: `1px solid ${s.border}`,
+        fontWeight: 'bold',
+      }}
+    >
+      {label}:{value}
     </span>
   )
 }
@@ -29,99 +44,199 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
   const color = getScoreColor(fn.score)
 
   return (
-    <div className="border border-[#2a2a35] rounded-lg overflow-hidden">
+    <div
+      style={{
+        border: '1px solid #1a1a3a',
+        background: '#0f0f1e',
+      }}
+    >
+      {/* Header row */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#1e1e28] transition-colors text-left"
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '6px 10px',
+          background: 'transparent',
+          border: 'none',
+          color: '#e0e0ff',
+          cursor: 'pointer',
+          textAlign: 'left',
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#14142a' }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
       >
-        <span className="text-[#6b6b80]">
-          {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        <span style={{ color: '#9090c0', flexShrink: 0 }}>
+          {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
         </span>
 
         <DotIndicator color={color} />
 
-        <span className="font-mono text-sm text-[#e8e8f0] flex-1 min-w-0 truncate">
+        <span
+          style={{
+            fontFamily: 'Courier New',
+            fontSize: 11,
+            color: '#e0e0ff',
+            flex: 1,
+            minWidth: 0,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
           {fn.name}
         </span>
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
           {showImpact && (
-            <ScoreBadge score={fn.impact} color={getScoreColor(fn.impact >= 4 ? 1 : fn.impact >= 3 ? 5 : 8)} label="Imp" size="sm" />
+            <ScoreBadge
+              score={fn.impact}
+              color={fn.impact >= 4 ? 'red' : fn.impact >= 3 ? 'yellow' : 'green'}
+              label="Imp"
+              size="sm"
+            />
           )}
           <ScoreBadge score={fn.score} color={color} label="Seg" size="sm" />
-          {statusBadge(fn.limites, 'L')}
-          {statusBadge(fn.delay, 'D')}
+          <StatusBadge value={fn.limites} label="L" />
+          <StatusBadge value={fn.delay}   label="D" />
         </div>
       </button>
 
+      {/* Expanded detail */}
       {open && (
-        <div className="border-t border-[#2a2a35] px-4 py-4 space-y-4 bg-[#16161d]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+          style={{
+            borderTop: '1px solid #1a1a3a',
+            padding: '10px 12px',
+            background: '#0a0a18',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+          }}
+        >
+          {/* Permission + Concentration */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div>
-              <p className="text-xs text-[#6b6b80] uppercase tracking-wide mb-1">Permissão</p>
-              <p className="text-sm text-[#e8e8f0] font-mono">{fn.permission}</p>
-            </div>
-            <div>
-              <p className="text-xs text-[#6b6b80] uppercase tracking-wide mb-1">Concentração</p>
-              <p className="text-sm text-[#e8e8f0]">{fn.concentration}</p>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs text-[#6b6b80] uppercase tracking-wide mb-1 flex items-center gap-1.5">
-              <AlertTriangle size={12} />
-              Risco Principal
-            </p>
-            <p className="text-sm text-[#9494a8] leading-relaxed">{fn.mainRisk}</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-lg border border-[#2a2a35] p-3">
-              <p className="text-xs text-[#6b6b80] mb-1.5 flex items-center gap-1.5">
-                <BarChart2 size={12} />
-                Limites de Exposição
-              </p>
-              <div className="flex items-center gap-2">
-                {statusBadge(fn.limites, 'Limites')}
-                <span className="text-xs text-[#6b6b80]">
-                  {fn.limites === 'N/A' ? 'Não precisa (sem exposição financeira)' :
-                   fn.limites === 'Sim' ? 'Limites rigorosos implementados' :
-                   fn.limites === 'Parcial' ? 'Limites parciais ou contornáveis' :
-                   'Precisa de limites — nenhum implementado'}
-                </span>
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
+                PERMISSÃO
+              </div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 10, color: '#e0e0ff' }}>
+                {fn.permission}
               </div>
             </div>
-            <div className="rounded-lg border border-[#2a2a35] p-3">
-              <p className="text-xs text-[#6b6b80] mb-1.5 flex items-center gap-1.5">
-                <Clock size={12} />
-                Mecanismo de Delay
-              </p>
-              <div className="flex items-center gap-2">
-                {statusBadge(fn.delay, 'Delay')}
-                <span className="text-xs text-[#6b6b80]">
-                  {fn.delay === 'N/A' ? 'Não precisa (permissionless ou emergência)' :
-                   fn.delay === 'Sim' ? 'Timelock on-chain presente' :
-                   fn.delay === 'Parcial' ? 'Delay parcial (rate limit / multisig)' :
-                   'Precisa de delay — nenhum implementado'}
-                </span>
+            <div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
+                CONCENTRAÇÃO
+              </div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 10, color: '#e0e0ff' }}>
+                {fn.concentration}
               </div>
             </div>
           </div>
 
+          {/* Main risk */}
           <div>
-            <p className="text-xs text-[#6b6b80] uppercase tracking-wide mb-2 flex items-center gap-1.5">
-              <Shield size={12} />
-              Score por Dimensão
-            </p>
+            <div
+              style={{
+                fontFamily: 'Courier New',
+                fontSize: 9,
+                color: '#9090c0',
+                marginBottom: 4,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              <AlertTriangle size={10} /> RISCO PRINCIPAL
+            </div>
+            <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
+              {fn.mainRisk}
+            </div>
+          </div>
+
+          {/* Limites + Delay */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
+              <div
+                style={{
+                  fontFamily: 'Courier New',
+                  fontSize: 9,
+                  color: '#9090c0',
+                  marginBottom: 6,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                }}
+              >
+                <BarChart2 size={10} /> LIMITES
+              </div>
+              <StatusBadge value={fn.limites} label="Limites" />
+              <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', marginTop: 4 }}>
+                {fn.limites === 'N/A'     ? 'Sem exposição financeira'            :
+                 fn.limites === 'Sim'     ? 'Limites rigorosos implementados'     :
+                 fn.limites === 'Parcial' ? 'Limites parciais ou contornáveis'    :
+                                           'Necessita limites — nenhum existe'   }
+              </div>
+            </div>
+            <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
+              <div
+                style={{
+                  fontFamily: 'Courier New',
+                  fontSize: 9,
+                  color: '#9090c0',
+                  marginBottom: 6,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                }}
+              >
+                <Clock size={10} /> DELAY
+              </div>
+              <StatusBadge value={fn.delay} label="Delay" />
+              <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', marginTop: 4 }}>
+                {fn.delay === 'N/A'     ? 'Permissionless / emergência / Timelock já presente' :
+                 fn.delay === 'Sim'     ? 'Timelock on-chain presente'                         :
+                 fn.delay === 'Parcial' ? 'Rate limit temporal / multisig'                    :
+                                         'Necessita delay — nenhum existe'                    }
+              </div>
+            </div>
+          </div>
+
+          {/* Dimension table */}
+          <div>
+            <div
+              style={{
+                fontFamily: 'Courier New',
+                fontSize: 9,
+                color: '#9090c0',
+                marginBottom: 6,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
+              <Shield size={10} /> SCORE POR DIMENSÃO
+            </div>
             <DimensionTable fn={fn} />
           </div>
 
+          {/* Worst case */}
           {fn.worstCase && (
-            <div className="rounded-lg border border-[#3f2d0a] bg-[#1e1a0a] p-3">
-              <p className="text-xs text-[#f59e0b] uppercase tracking-wide mb-1.5 font-semibold">
-                Pior Cenário
-              </p>
-              <p className="text-sm text-[#9494a8] leading-relaxed">{fn.worstCase}</p>
+            <div
+              style={{
+                border: '1px solid #3a2000',
+                background: '#180e00',
+                padding: 10,
+              }}
+            >
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#ffcc00', marginBottom: 6, fontWeight: 'bold' }}>
+                ⚠ PIOR CENÁRIO
+              </div>
+              <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
+                {fn.worstCase}
+              </div>
             </div>
           )}
         </div>

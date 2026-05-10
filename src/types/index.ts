@@ -57,8 +57,8 @@ export function getScoreColor(score: number): ScoreColor {
 }
 
 export function getCriticalidadeColor(value: number): ScoreColor {
-  if (value >= 3.5) return 'red'
-  if (value >= 2.5) return 'yellow'
+  if (value >= 8) return 'red'
+  if (value >= 4) return 'yellow'
   return 'green'
 }
 
