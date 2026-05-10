@@ -19,10 +19,10 @@ export function OverviewTab({ layers, contracts, functions }: OverviewTabProps) 
       {/* Summary strip */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
         {[
-          { label: 'SEC. AVG',       value: avgSec,        color: getScoreColor(parseFloat(avgSec)),    sub: 'protocol-wide'  },
-          { label: 'RELEV. AVG',    value: avgRelev,      color: getRelevanceColor(parseFloat(avgRelev)), sub: 'across components' },
-          { label: 'CONTRACTS',     value: contracts.length, color: 'green' as const, sub: 'mapped'        },
-          { label: 'CRITICAL FNS',  value: criticalFns,   color: criticalFns > 0 ? 'red' as const : 'green' as const, sub: 'score <= 3' },
+          { label: 'SECURITY AVG',       value: avgSec,        color: getScoreColor(parseFloat(avgSec)),    sub: 'protocol-wide'  },
+          { label: 'RELEVANCE AVG',      value: avgRelev,      color: getRelevanceColor(parseFloat(avgRelev)), sub: 'across components' },
+          { label: 'CONTRACTS',          value: contracts.length, color: 'green' as const, sub: 'mapped'        },
+          { label: 'CRITICAL FUNCTIONS', value: criticalFns,   color: criticalFns > 0 ? 'red' as const : 'green' as const, sub: 'score <= 3' },
         ].map(stat => (
           <div
             key={stat.label}
