@@ -21,7 +21,7 @@ type Tab = 'overview' | 'summary' | 'insecure' | 'top30'
 const TABS: { id: Tab; label: string; shortcut: string }[] = [
   { id: 'overview', label: 'NODE MAP',             shortcut: 'F1' },
   { id: 'summary',  label: 'SUMMARY BY LAYER',     shortcut: 'F2' },
-  { id: 'insecure', label: 'MOST INSECURE',         shortcut: 'F3' },
+  { id: 'insecure', label: 'HIGHEST RISK',           shortcut: 'F3' },
   { id: 'top30',    label: 'TOP 30 BY RELEVANCE',   shortcut: 'F4' },
 ]
 

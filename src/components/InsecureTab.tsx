@@ -147,10 +147,10 @@ export function InsecureTab({ functions, contracts }: InsecureTabProps) {
         }}
       >
         <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 8, color: '#ff3333', marginBottom: 6 }}>
-          TOP 20 MOST INSECURE FUNCTIONS
+          TOP 20 HIGHEST RISK FUNCTIONS
         </div>
         <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#9090c0' }}>
-          Sorted by ascending score (2 = most insecure). Includes only state functions with score &le; 5.
+          Sorted by ascending score (2 = highest risk). Includes only state functions with score &le; 5.
           Expand to view absence of Limits/Delay and worst case exploit scenario.
         </div>
       </div>
