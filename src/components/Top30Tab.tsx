@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
 import { getScoreColor, getNetworkExplorerUrl } from '../types'
 import type { SparkFunction, Contract, Top30Entry } from '../types'
@@ -10,14 +10,14 @@ interface Top30TabProps {
   contracts: Contract[]
 }
 
-function ImpactBadge({ impact }: { impact: number }) {
+function RelevanciaBadge({ value }: { value: number }) {
   const [bg, text, border] =
-    impact >= 4 ? ['#2a0000', '#ff3333', '#ff333340'] :
-    impact >= 3 ? ['#2a1a00', '#ffcc00', '#ffcc0040'] :
-                  ['#002200', '#00ff41', '#00ff4140']
+    value >= 8 ? ['#2a0000', '#ff3333', '#ff333340'] :
+    value >= 4 ? ['#2a1a00', '#ffcc00', '#ffcc0040'] :
+                 ['#002200', '#00ff41', '#00ff4140']
   return (
     <span style={{ fontFamily: 'Courier New', fontSize: 9, padding: '1px 5px', background: bg, color: text, border: `1px solid ${border}`, fontWeight: 'bold' }}>
-      IMP {impact}
+      Relev {value}
     </span>
   )
 }
@@ -34,7 +34,7 @@ function Top30Card({ entry, fn, contract }: { entry: Top30Entry; fn: SparkFuncti
         <span style={{ fontFamily: 'Courier New', fontSize: 16, color: '#2a2a55', width: 28, textAlign: 'right', flexShrink: 0, lineHeight: 1.2, paddingTop: 2 }}>
           {String(entry.rank).padStart(2, '0')}
         </span>
-        <DotIndicator color={entry.impact >= 4 ? 'red' : entry.impact >= 3 ? 'yellow' : 'green'} />
+        <DotIndicator color={entry.relevance >= 8 ? 'red' : entry.relevance >= 4 ? 'yellow' : 'green'} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 4 }}>
             <span style={{ fontFamily: 'Courier New', fontSize: 12, color: '#e0e0ff', fontWeight: 'bold' }}>
@@ -52,12 +52,17 @@ function Top30Card({ entry, fn, contract }: { entry: Top30Entry; fn: SparkFuncti
               <span style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0' }}>{contract.name}</span>
             )}
           </div>
+          <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5, marginBottom: 4 }}>
+            {fn.description && fn.description !== '-' && (
+              <span style={{ color: '#c8c8e8' }}>{fn.description}</span>
+            )}
+          </div>
           <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5, marginBottom: 8 }}>
             {fn.mainRisk}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-            <ImpactBadge impact={entry.impact} />
-            <ScoreBadge score={fn.score} color={secColor} label="Seg" size="sm" />
+            <RelevanciaBadge value={entry.relevance} />
+            <ScoreBadge score={fn.score} color={secColor} label="Sec" size="sm" />
             <span style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0' }}>{fn.permission}</span>
           </div>
         </div>
@@ -76,7 +81,7 @@ function Top30Card({ entry, fn, contract }: { entry: Top30Entry; fn: SparkFuncti
         <div style={{ borderTop: '1px solid #1a1a3a', padding: '10px 12px', background: '#0c0c00' }}>
           <div style={{ border: '1px solid #3a2a00', background: '#180e00', padding: 10 }}>
             <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#ffcc00', marginBottom: 6, fontWeight: 'bold' }}>
-              ⚠ PIOR CENÁRIO DE IMPACTO
+              &#9888; WORST IMPACT SCENARIO
             </div>
             <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
               {entry.worstCase}
@@ -103,19 +108,19 @@ export function Top30Tab({ top30, functions, contracts }: Top30TabProps) {
         }}
       >
         <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 8, color: '#ffcc00', marginBottom: 6 }}>
-          TOP 30 POR CRITICIDADE (IMPACTO)
+          TOP 30 BY RELEVANCE (IMPACT)
         </div>
         <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#9090c0' }}>
-          Ordenadas por impacto potencial no protocolo (4 = catastrófico, 1 = baixo). O score de segurança é secundário.
-          Expanda para ver o pior cenário de exploração.
+          Sorted by potential relevance to the protocol (10 = catastrophic, 1 = low). Security score is secondary.
+          Expand to see the worst case exploit scenario.
         </div>
       </div>
 
       {/* Legend */}
       <div style={{ display: 'flex', gap: 16, fontFamily: 'Courier New', fontSize: 9, color: '#9090c0' }}>
-        <span><span style={{ color: '#ff3333', fontWeight: 'bold' }}>IMP 4</span> — Catastrófico</span>
-        <span><span style={{ color: '#ffcc00', fontWeight: 'bold' }}>IMP 3</span> — Severo</span>
-        <span><span style={{ color: '#00ff41', fontWeight: 'bold' }}>IMP 2</span> — Moderado</span>
+        <span><span style={{ color: '#ff3333', fontWeight: 'bold' }}>Relev 10</span> - Catastrophic</span>
+        <span><span style={{ color: '#ffcc00', fontWeight: 'bold' }}>Relev 7</span> - Severe</span>
+        <span><span style={{ color: '#00ff41', fontWeight: 'bold' }}>Relev 1-4</span> - Moderate/Low</span>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

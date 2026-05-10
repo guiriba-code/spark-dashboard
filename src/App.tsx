@@ -9,18 +9,20 @@ import type { Layer, Contract, SparkFunction, Top30Entry } from './types'
 import { OverviewTab  } from './components/OverviewTab'
 import { InsecureTab  } from './components/InsecureTab'
 import { Top30Tab     } from './components/Top30Tab'
+import { SummaryTab   } from './components/SummaryTab'
 
 const typedLayers    = layers    as Layer[]
 const typedContracts = contracts as Contract[]
 const typedFunctions = functions as SparkFunction[]
 const typedTop30     = top30     as Top30Entry[]
 
-type Tab = 'overview' | 'insecure' | 'top30'
+type Tab = 'overview' | 'summary' | 'insecure' | 'top30'
 
 const TABS: { id: Tab; label: string; shortcut: string }[] = [
-  { id: 'overview', label: 'VISÃO GERAL',          shortcut: 'F1' },
-  { id: 'insecure', label: 'MAIS INSEGURAS',        shortcut: 'F2' },
-  { id: 'top30',    label: 'TOP 30 CRITICIDADE',   shortcut: 'F3' },
+  { id: 'overview', label: 'NODE MAP',             shortcut: 'F1' },
+  { id: 'summary',  label: 'SUMMARY BY LAYER',     shortcut: 'F2' },
+  { id: 'insecure', label: 'MOST INSECURE',         shortcut: 'F3' },
+  { id: 'top30',    label: 'TOP 30 BY RELEVANCE',   shortcut: 'F4' },
 ]
 
 export default function App() {
@@ -163,6 +165,12 @@ export default function App() {
             functions={typedFunctions}
           />
         )}
+        {activeTab === 'summary' && (
+          <SummaryTab
+            layers={typedLayers}
+            contracts={typedContracts}
+          />
+        )}
         {activeTab === 'insecure' && (
           <InsecureTab
             functions={typedFunctions}
@@ -196,9 +204,9 @@ export default function App() {
             color: '#6060a0',
           }}
         >
-          Score = (Acesso + Limites + Verificabilidade + Delay) − 2 &nbsp;|&nbsp;
-          10 = mais seguro · 2 = mais inseguro &nbsp;|&nbsp;
-          Criticidade = (∑ critérios − 5) / 5 × 9 + 1
+          Score = (Access + Limits + Verifiability + Delay) − 2 &nbsp;|&nbsp;
+          10 = most secure · 2 = least secure &nbsp;|&nbsp;
+          Relevance = (sum criteria − 5) / 5 × 9 + 1
         </span>
         <span
           style={{
@@ -207,7 +215,7 @@ export default function App() {
             color: '#6060a0',
           }}
         >
-          {new Date().toLocaleDateString('pt-BR')} &nbsp;|&nbsp;
+          {new Date().toLocaleDateString('en-US')} &nbsp;|&nbsp;
           <a
             href="https://spark.fi"
             target="_blank"

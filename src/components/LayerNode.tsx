@@ -1,8 +1,8 @@
-import { memo } from 'react'
+﻿import { memo } from 'react'
 import { Handle, Position } from '@xyflow/react'
 import type { NodeProps, Node } from '@xyflow/react'
 import type { Layer } from '../types'
-import { getScoreColor, getCriticalidadeColor } from '../types'
+import { getScoreColor, getRelevanceColor } from '../types'
 import { ScoreBadge, DotIndicator } from './ScoreBadge'
 
 export type LayerNodeData = {
@@ -16,7 +16,7 @@ export type LayerNodeType = Node<LayerNodeData, 'layer'>
 function LayerNodeComponent({ data }: NodeProps<LayerNodeType>) {
   const { layer, expanded, contractCount } = data
   const secColor = getScoreColor(layer.securityScore)
-  const critColor = getCriticalidadeColor(layer.criticidade)
+  const critColor = getRelevanceColor(layer.relevance)
 
   const borderColor = expanded ? '#4040ff' : '#2a2a55'
   const glowColor   = expanded ? '#4040ff88' : 'transparent'
@@ -89,15 +89,15 @@ function LayerNodeComponent({ data }: NodeProps<LayerNodeType>) {
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
           <div style={{ textAlign: 'left' }}>
             <div style={{ fontFamily: "'Courier New', monospace", fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
-              SEG
+              Security
             </div>
             <ScoreBadge score={layer.securityScore} color={secColor} size="sm" />
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontFamily: "'Courier New', monospace", fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
-              CRIT
+              Relevance
             </div>
-            <ScoreBadge score={layer.criticidade} color={critColor} size="sm" />
+            <ScoreBadge score={layer.relevance} color={critColor} size="sm" />
           </div>
         </div>
 
@@ -112,7 +112,7 @@ function LayerNodeComponent({ data }: NodeProps<LayerNodeType>) {
         >
           <DotIndicator color={secColor} />
           <span style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0' }}>
-            {contractCount} contrato{contractCount !== 1 ? 's' : ''}
+            {contractCount} contract{contractCount !== 1 ? 's' : ''}
           </span>
           {expanded && (
             <span

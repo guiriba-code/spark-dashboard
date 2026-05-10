@@ -1,58 +1,112 @@
 [
   {
     "id": "governance",
-    "name": "Governança e Controle de Acesso",
-    "securityScore": 8.1,
-    "criticidade": 10.0,
-    "contractIds": ["executor", "aclmanager", "pooladdressesprovider"]
+    "name": "Governance and Access Control",
+    "securityScore": 7.4,
+    "contractIds": [
+      "executor",
+      "aclmanager",
+      "pooladdressesprovider",
+      "sparkpayloadethereum"
+    ],
+    "relevance": 10
   },
   {
     "id": "lending",
-    "name": "Empréstimos (SparkLend Core)",
+    "name": "Lending (SparkLend Core)",
     "securityScore": 7.9,
-    "criticidade": 10.0,
-    "contractIds": ["pool", "poolconfigurator", "atoken", "stabledebttoken", "variabledebttoken"]
+    "contractIds": [
+      "pool",
+      "poolconfigurator",
+      "atoken",
+      "stabledebttoken",
+      "variabledebttoken",
+      "sparklendconduit"
+    ],
+    "relevance": 10
   },
   {
     "id": "alm",
-    "name": "Liquidez e ALM",
+    "name": "Liquidity and ALM",
     "securityScore": 7.1,
-    "criticidade": 8.2,
-    "contractIds": ["almproxy", "mainnetcontroller", "foreigncontroller", "ratelimits", "otcbuffer"]
+    "contractIds": [
+      "almproxy",
+      "mainnetcontroller",
+      "foreigncontroller",
+      "ratelimits",
+      "otcbuffer"
+    ],
+    "relevance": 8.2
   },
   {
     "id": "security",
-    "name": "Segurança e Emergência",
-    "securityScore": 9.0,
-    "criticidade": 4.6,
-    "contractIds": ["sparklendfreezermom", "killswitchoracle", "emergencyspells"]
+    "name": "Security and Emergency",
+    "securityScore": 9.2,
+    "contractIds": [
+      "sparklendfreezermom",
+      "killswitchoracle",
+      "spellfreezeall",
+      "spellfreezesingle",
+      "spellpauseall",
+      "spellpausesingle",
+      "spellremovemultisig"
+    ],
+    "relevance": 4.6
   },
   {
     "id": "automation",
-    "name": "Automação",
+    "name": "Automation",
     "securityScore": 8.3,
-    "criticidade": 2.8,
-    "contractIds": ["capautomator", "resolvers"]
+    "contractIds": [
+      "capautomator",
+      "capautomatorresolver",
+      "d3mresolver",
+      "govexecutorresolver",
+      "killswitchresolver",
+      "xchaindsroracleresolver"
+    ],
+    "relevance": 2.8
   },
   {
     "id": "oracles",
-    "name": "Oráculos",
+    "name": "Oracles",
     "securityScore": 8.5,
-    "criticidade": 8.2,
-    "contractIds": ["morphoUpgradableOracle", "ssrauthOracle", "ssrmainnetOracle"]
+    "contractIds": [
+      "morphoUpgradableOracle",
+      "ssrauthOracle",
+      "ssrmainnetOracle"
+    ],
+    "relevance": 8.2
   },
   {
     "id": "crosschain",
     "name": "Cross-chain",
-    "securityScore": 7.5,
-    "criticidade": 2.8,
-    "contractIds": ["xchainhelpersreceivers", "sparkpsm"]
+    "securityScore": 8.7,
+    "contractIds": [
+      "sparkpsm",
+      "ambreceiver",
+      "arbitrumreceiver",
+      "cctpreceiver",
+      "lzreceiver",
+      "optimismreceiver"
+    ],
+    "relevance": 2.8
   },
   {
     "id": "rewards",
-    "name": "Recompensas e Vesting",
-    "securityScore": 8.0,
-    "criticidade": 2.8,
-    "contractIds": ["sparkrewards", "dssvest", "savingsvaultintents", "sparkvault", "usdcvault"]
+    "name": "Rewards and Vesting",
+    "securityScore": 7.5,
+    "contractIds": [
+      "sparkrewards",
+      "dssvest",
+      "dssvestmintable",
+      "dssvestsuckable",
+      "dssvesttransferrable",
+      "savingsvaultintents",
+      "sparkvault",
+      "usdcvault",
+      "usdcvaultl2"
+    ],
+    "relevance": 2.8
   }
 ]

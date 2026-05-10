@@ -5,10 +5,13 @@
     "repository": "spark-gov-relay",
     "layerId": "governance",
     "securityScore": 8.2,
-    "criticidade": 10.0,
     "addresses": [
-      { "network": "mainnet", "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c"
+      }
+    ],
+    "relevance": 10
   },
   {
     "id": "aclmanager",
@@ -16,10 +19,13 @@
     "repository": "sparklend-v1-core",
     "layerId": "governance",
     "securityScore": 8.8,
-    "criticidade": 10.0,
     "addresses": [
-      { "network": "mainnet", "address": "0xdA135Cd78A086025BcdC87B038a1C462032b510C" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0xdA135Cd78A086025BcdC87B038a1C462032b510C"
+      }
+    ],
+    "relevance": 10
   },
   {
     "id": "pooladdressesprovider",
@@ -27,10 +33,27 @@
     "repository": "sparklend-v1-core",
     "layerId": "governance",
     "securityScore": 7.4,
-    "criticidade": 10.0,
     "addresses": [
-      { "network": "mainnet", "address": "0x02C3eA4e34C0cBd694D2adFa2c690EECbC1793eE" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x02C3eA4e34C0cBd694D2adFa2c690EECbC1793eE"
+      }
+    ],
+    "relevance": 10
+  },
+  {
+    "id": "sparkpayloadethereum",
+    "name": "SparkPayloadEthereum",
+    "repository": "spark-spells",
+    "layerId": "governance",
+    "securityScore": 5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 8.2
   },
   {
     "id": "pool",
@@ -38,10 +61,13 @@
     "repository": "sparklend-v1-core",
     "layerId": "lending",
     "securityScore": 8.1,
-    "criticidade": 10.0,
     "addresses": [
-      { "network": "mainnet", "address": "0xC13e21B648A5Ee794902342038FF3aDAB66BE987" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0xC13e21B648A5Ee794902342038FF3aDAB66BE987"
+      }
+    ],
+    "relevance": 10
   },
   {
     "id": "poolconfigurator",
@@ -49,37 +75,54 @@
     "repository": "sparklend-v1-core",
     "layerId": "lending",
     "securityScore": 6.6,
-    "criticidade": 8.2,
     "addresses": [
-      { "network": "mainnet", "address": "0x542DBa469bdE58FAeEA4F3d0dDF2e1CdFe65cF6b" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x542DBa469bdE58FAeEA4F3d0dDF2e1CdFe65cF6b"
+      }
+    ],
+    "relevance": 8.2
   },
   {
     "id": "atoken",
     "name": "AToken",
     "repository": "sparklend-v1-core",
     "layerId": "lending",
-    "securityScore": 8.0,
-    "criticidade": 8.2,
-    "addresses": []
+    "securityScore": 8,
+    "addresses": [],
+    "relevance": 8.2
   },
   {
     "id": "stabledebttoken",
     "name": "StableDebtToken",
     "repository": "sparklend-v1-core",
     "layerId": "lending",
-    "securityScore": 9.0,
-    "criticidade": 1.0,
-    "addresses": []
+    "securityScore": 9,
+    "addresses": [],
+    "relevance": 1
   },
   {
     "id": "variabledebttoken",
     "name": "VariableDebtToken",
     "repository": "sparklend-v1-core",
     "layerId": "lending",
-    "securityScore": 9.0,
-    "criticidade": 8.2,
-    "addresses": []
+    "securityScore": 9,
+    "addresses": [],
+    "relevance": 8.2
+  },
+  {
+    "id": "sparklendconduit",
+    "name": "SparkLendConduit",
+    "repository": "sparklend-conduits",
+    "layerId": "lending",
+    "securityScore": 6.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "almproxy",
@@ -87,10 +130,13 @@
     "repository": "spark-alm-controller",
     "layerId": "alm",
     "securityScore": 6.1,
-    "criticidade": 8.2,
     "addresses": [
-      { "network": "mainnet", "address": "0x8A87497488073307E1a17e8A12475a94Afcb413f" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x8A87497488073307E1a17e8A12475a94Afcb413f"
+      }
+    ],
+    "relevance": 8.2
   },
   {
     "id": "mainnetcontroller",
@@ -98,10 +144,13 @@
     "repository": "spark-alm-controller",
     "layerId": "alm",
     "securityScore": 7.2,
-    "criticidade": 6.4,
     "addresses": [
-      { "network": "mainnet", "address": "0x98e3b6F22c47e7f3e02E7f6De61bCE4b1a9EF1E" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x98e3b6F22c47e7f3e02E7f6De61bCE4b1a9EF1E"
+      }
+    ],
+    "relevance": 6.4
   },
   {
     "id": "foreigncontroller",
@@ -109,11 +158,17 @@
     "repository": "spark-alm-controller",
     "layerId": "alm",
     "securityScore": 6.9,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "base", "address": "" },
-      { "network": "arbitrum", "address": "" }
-    ]
+      {
+        "network": "base",
+        "address": ""
+      },
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "ratelimits",
@@ -121,10 +176,13 @@
     "repository": "spark-alm-controller",
     "layerId": "alm",
     "securityScore": 6.8,
-    "criticidade": 4.6,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 4.6
   },
   {
     "id": "otcbuffer",
@@ -132,41 +190,111 @@
     "repository": "spark-alm-controller",
     "layerId": "alm",
     "securityScore": 8.2,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "sparklendfreezermom",
     "name": "SparkLendFreezerMom",
     "repository": "sparklend-freezer",
     "layerId": "security",
-    "securityScore": 8.0,
-    "criticidade": 4.6,
+    "securityScore": 8,
     "addresses": [
-      { "network": "mainnet", "address": "0x7B9e5E79aC34e2d89b7d756Fc23f56aCBb14b44A" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x7B9e5E79aC34e2d89b7d756Fc23f56aCBb14b44A"
+      }
+    ],
+    "relevance": 4.6
   },
   {
     "id": "killswitchoracle",
     "name": "KillSwitchOracle",
     "repository": "sparklend-kill-switch",
     "layerId": "security",
-    "securityScore": 9.0,
-    "criticidade": 2.8,
+    "securityScore": 9,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
-    "id": "emergencyspells",
-    "name": "Emergency Spells",
+    "id": "spellfreezeall",
+    "name": "EmergencySpell FreezeAllAssets",
     "repository": "sparklend-freezer",
     "layerId": "security",
-    "securityScore": 10.0,
-    "criticidade": 4.6,
-    "addresses": []
+    "securityScore": 10,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 4.6
+  },
+  {
+    "id": "spellfreezesingle",
+    "name": "EmergencySpell FreezeSingleAsset",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 10,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "spellpauseall",
+    "name": "EmergencySpell PauseAllAssets",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 9,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 4.6
+  },
+  {
+    "id": "spellpausesingle",
+    "name": "EmergencySpell PauseSingleAsset",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 10,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "spellremovemultisig",
+    "name": "EmergencySpell RemoveMultisig",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 9,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 4.6
   },
   {
     "id": "capautomator",
@@ -174,19 +302,83 @@
     "repository": "sparklend-cap-automator",
     "layerId": "automation",
     "securityScore": 8.1,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "mainnet", "address": "0x2276f52afba7Cf2525fd0a050DF464AC8532d0ef" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x2276f52afba7Cf2525fd0a050DF464AC8532d0ef"
+      }
+    ],
+    "relevance": 2.8
   },
   {
-    "id": "resolvers",
-    "name": "Resolvers (Keepers)",
+    "id": "capautomatorresolver",
+    "name": "CapAutomatorResolver",
     "repository": "automation",
     "layerId": "automation",
-    "securityScore": 8.4,
-    "criticidade": 1.0,
-    "addresses": []
+    "securityScore": 8.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "d3mresolver",
+    "name": "D3MResolver",
+    "repository": "automation",
+    "layerId": "automation",
+    "securityScore": 8.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "govexecutorresolver",
+    "name": "GovernanceExecutorResolver",
+    "repository": "automation",
+    "layerId": "automation",
+    "securityScore": 7.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "killswitchresolver",
+    "name": "KillSwitchResolver",
+    "repository": "automation",
+    "layerId": "automation",
+    "securityScore": 8.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "xchaindsroracleresolver",
+    "name": "XChainDSROracle Resolver",
+    "repository": "automation",
+    "layerId": "automation",
+    "securityScore": 8.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
   },
   {
     "id": "morphoUpgradableOracle",
@@ -194,10 +386,13 @@
     "repository": "sparklend-advanced",
     "layerId": "oracles",
     "securityScore": 8.3,
-    "criticidade": 8.2,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 8.2
   },
   {
     "id": "ssrauthOracle",
@@ -205,35 +400,31 @@
     "repository": "xchain-ssr-oracle",
     "layerId": "oracles",
     "securityScore": 7.3,
-    "criticidade": 1.0,
     "addresses": [
-      { "network": "base", "address": "" },
-      { "network": "arbitrum", "address": "" }
-    ]
+      {
+        "network": "base",
+        "address": ""
+      },
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 1
   },
   {
     "id": "ssrmainnetOracle",
     "name": "SSRMainnetOracle",
     "repository": "xchain-ssr-oracle",
     "layerId": "oracles",
-    "securityScore": 10.0,
-    "criticidade": 1.0,
+    "securityScore": 10,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
-  },
-  {
-    "id": "xchainhelpersreceivers",
-    "name": "xchain Receivers",
-    "repository": "xchain-helpers",
-    "layerId": "crosschain",
-    "securityScore": 8.1,
-    "criticidade": 1.0,
-    "addresses": [
-      { "network": "mainnet", "address": "" },
-      { "network": "base", "address": "" },
-      { "network": "arbitrum", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
   },
   {
     "id": "sparkpsm",
@@ -241,10 +432,95 @@
     "repository": "spark-psm",
     "layerId": "crosschain",
     "securityScore": 9.4,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "base", "address": "0x1601843c5E9bC251A3272907010AFa41Fa18347E" }
-    ]
+      {
+        "network": "base",
+        "address": "0x1601843c5E9bC251A3272907010AFa41Fa18347E"
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "ambreceiver",
+    "name": "AMBReceiver",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 8,
+    "addresses": [
+      {
+        "network": "base",
+        "address": ""
+      },
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "arbitrumreceiver",
+    "name": "ArbitrumReceiver",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 9,
+    "addresses": [
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "cctpreceiver",
+    "name": "CCTPReceiver",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 8.5,
+    "addresses": [
+      {
+        "network": "base",
+        "address": ""
+      },
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "lzreceiver",
+    "name": "LZReceiver",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 7.5,
+    "addresses": [
+      {
+        "network": "base",
+        "address": ""
+      },
+      {
+        "network": "arbitrum",
+        "address": ""
+      }
+    ],
+    "relevance": 1
+  },
+  {
+    "id": "optimismreceiver",
+    "name": "OptimismReceiver",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 9,
+    "addresses": [
+      {
+        "network": "base",
+        "address": ""
+      }
+    ],
+    "relevance": 1
   },
   {
     "id": "sparkrewards",
@@ -252,10 +528,13 @@
     "repository": "spark-rewards",
     "layerId": "rewards",
     "securityScore": 7.9,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "dssvest",
@@ -263,10 +542,55 @@
     "repository": "dss-vest",
     "layerId": "rewards",
     "securityScore": 7.4,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "mainnet", "address": "0x2Ff369f1aB42B610F0A81D46aC1cEdFE0aE48C7" }
-    ]
+      {
+        "network": "mainnet",
+        "address": "0x2Ff369f1aB42B610F0A81D46aC1cEdFE0aE48C7"
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "dssvestmintable",
+    "name": "DssVestMintable",
+    "repository": "dss-vest",
+    "layerId": "rewards",
+    "securityScore": 7.4,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "dssvestsuckable",
+    "name": "DssVestSuckable",
+    "repository": "dss-vest",
+    "layerId": "rewards",
+    "securityScore": 6.5,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
+  },
+  {
+    "id": "dssvesttransferrable",
+    "name": "DssVestTransferrable",
+    "repository": "dss-vest",
+    "layerId": "rewards",
+    "securityScore": 7.4,
+    "addresses": [
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "savingsvaultintents",
@@ -274,10 +598,13 @@
     "repository": "spark-savings-intents",
     "layerId": "rewards",
     "securityScore": 8.75,
-    "criticidade": 1.0,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 1
   },
   {
     "id": "sparkvault",
@@ -285,21 +612,44 @@
     "repository": "spark-vaults-v2",
     "layerId": "rewards",
     "securityScore": 7.8,
-    "criticidade": 2.8,
     "addresses": [
-      { "network": "mainnet", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   },
   {
     "id": "usdcvault",
     "name": "UsdcVault",
     "repository": "spark-vaults",
     "layerId": "rewards",
-    "securityScore": 7.0,
-    "criticidade": 4.6,
+    "securityScore": 7,
     "addresses": [
-      { "network": "mainnet", "address": "" },
-      { "network": "base", "address": "" }
-    ]
+      {
+        "network": "mainnet",
+        "address": ""
+      },
+      {
+        "network": "base",
+        "address": ""
+      }
+    ],
+    "relevance": 4.6
+  },
+  {
+    "id": "usdcvaultl2",
+    "name": "UsdcVaultL2",
+    "repository": "spark-vaults",
+    "layerId": "rewards",
+    "securityScore": 7,
+    "addresses": [
+      {
+        "network": "base",
+        "address": ""
+      }
+    ],
+    "relevance": 2.8
   }
 ]

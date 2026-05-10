@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { ChevronDown, ChevronRight, AlertTriangle, Clock, BarChart2, Shield } from 'lucide-react'
 import { getScoreColor } from '../types'
 import type { SparkFunction } from '../types'
@@ -10,16 +10,23 @@ interface FunctionRowProps {
   showImpact?: boolean
 }
 
-type StatusVal = 'Sim' | 'Não' | 'Parcial' | 'N/A'
+type StatusVal = 'Yes' | 'No' | 'Partial' | 'N/A'
 
-function StatusBadge({ value, label }: { value: StatusVal; label: string }) {
+function normalizeStatus(value: string): StatusVal {
+  if (value.startsWith('Yes'))     return 'Yes'
+  if (value.startsWith('No'))      return 'No'
+  if (value.startsWith('Partial')) return 'Partial'
+  return 'N/A'
+}
+
+function StatusBadge({ value, label }: { value: string; label: string }) {
   const colorMap: Record<StatusVal, { bg: string; text: string; border: string }> = {
-    'Sim':    { bg: '#002200', text: '#00ff41', border: '#00ff4140' },
-    'Não':    { bg: '#2a0000', text: '#ff3333', border: '#ff333340' },
-    'Parcial':{ bg: '#2a1a00', text: '#ffcc00', border: '#ffcc0040' },
+    'Yes':    { bg: '#002200', text: '#00ff41', border: '#00ff4140' },
+    'No':     { bg: '#2a0000', text: '#ff3333', border: '#ff333340' },
+    'Partial':{ bg: '#2a1a00', text: '#ffcc00', border: '#ffcc0040' },
     'N/A':    { bg: '#0a0a1a', text: '#9090c0', border: '#2a2a55'  },
   }
-  const s = colorMap[value]
+  const s = colorMap[normalizeStatus(value)]
   return (
     <span
       style={{
@@ -92,14 +99,14 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
           {showImpact && (
             <ScoreBadge
-              score={fn.impact}
-              color={fn.impact >= 4 ? 'red' : fn.impact >= 3 ? 'yellow' : 'green'}
-              label="Imp"
+              score={fn.relevance}
+              color={fn.relevance >= 8 ? 'red' : fn.relevance >= 4 ? 'yellow' : 'green'}
+              label="Relev"
               size="sm"
             />
           )}
-          <ScoreBadge score={fn.score} color={color} label="Seg" size="sm" />
-          <StatusBadge value={fn.limites} label="L" />
+          <ScoreBadge score={fn.score} color={color} label="Sec" size="sm" />
+          <StatusBadge value={fn.limits} label="L" />
           <StatusBadge value={fn.delay}   label="D" />
         </div>
       </button>
@@ -120,7 +127,7 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
-                PERMISSÃO
+                PERMISSION
               </div>
               <div style={{ fontFamily: 'Courier New', fontSize: 10, color: '#e0e0ff' }}>
                 {fn.permission}
@@ -128,7 +135,7 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
             </div>
             <div>
               <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 2 }}>
-                CONCENTRAÇÃO
+                CONCENTRATION
               </div>
               <div style={{ fontFamily: 'Courier New', fontSize: 10, color: '#e0e0ff' }}>
                 {fn.concentration}
@@ -136,7 +143,18 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
             </div>
           </div>
 
-          {/* Main risk */}
+          {/* Description — what the function does */}
+          {fn.description && fn.description !== '-' && (
+            <div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 4 }}>
+                WHAT IT DOES
+              </div>
+              <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#c8c8e8', lineHeight: 1.5 }}>
+                {fn.description}
+              </div>
+            </div>
+          )}
+
           <div>
             <div
               style={{
@@ -149,14 +167,14 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
                 gap: 4,
               }}
             >
-              <AlertTriangle size={10} /> RISCO PRINCIPAL
+              <AlertTriangle size={10} /> MAIN RISK
             </div>
             <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
               {fn.mainRisk}
             </div>
           </div>
 
-          {/* Limites + Delay */}
+          {/* Limits + Delay */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
               <div
@@ -170,14 +188,14 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
                   gap: 4,
                 }}
               >
-                <BarChart2 size={10} /> LIMITES
+                <BarChart2 size={10} /> LIMITS
               </div>
-              <StatusBadge value={fn.limites} label="Limites" />
+              <StatusBadge value={fn.limits} label="Limits" />
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', marginTop: 4 }}>
-                {fn.limites === 'N/A'     ? 'Sem exposição financeira'            :
-                 fn.limites === 'Sim'     ? 'Limites rigorosos implementados'     :
-                 fn.limites === 'Parcial' ? 'Limites parciais ou contornáveis'    :
-                                           'Necessita limites — nenhum existe'   }
+                {fn.limits === 'N/A'      ? 'No financial exposure'               :
+                 fn.limits === 'Yes'      ? 'Strict limits implemented'            :
+                 fn.limits === 'Partial'  ? 'Partial or bypassable limits'         :
+                                           'Limits required — none exist'         }
               </div>
             </div>
             <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
@@ -196,10 +214,10 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
               </div>
               <StatusBadge value={fn.delay} label="Delay" />
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', marginTop: 4 }}>
-                {fn.delay === 'N/A'     ? 'Permissionless / emergência / Timelock já presente' :
-                 fn.delay === 'Sim'     ? 'Timelock on-chain presente'                         :
-                 fn.delay === 'Parcial' ? 'Rate limit temporal / multisig'                    :
-                                         'Necessita delay — nenhum existe'                    }
+                {fn.delay === 'N/A'      ? 'Permissionless / emergency / Timelock already present' :
+                 fn.delay === 'Yes'      ? 'On-chain Timelock present'                              :
+                 fn.delay === 'Partial'  ? 'Temporal rate limit / multisig'                        :
+                                          'Delay required — none exists'                           }
               </div>
             </div>
           </div>
@@ -217,7 +235,7 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
                 gap: 4,
               }}
             >
-              <Shield size={10} /> SCORE POR DIMENSÃO
+              <Shield size={10} /> SCORE BY DIMENSION
             </div>
             <DimensionTable fn={fn} />
           </div>
@@ -232,7 +250,7 @@ export function FunctionRow({ fn, showImpact = false }: FunctionRowProps) {
               }}
             >
               <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#ffcc00', marginBottom: 6, fontWeight: 'bold' }}>
-                ⚠ PIOR CENÁRIO
+                &#9888; WORST CASE SCENARIO
               </div>
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
                 {fn.worstCase}

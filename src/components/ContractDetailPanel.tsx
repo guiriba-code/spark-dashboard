@@ -1,6 +1,6 @@
-import { X, ExternalLink } from 'lucide-react'
+﻿import { X, ExternalLink } from 'lucide-react'
 import type { Contract, SparkFunction } from '../types'
-import { getScoreColor, getCriticalidadeColor, getNetworkExplorerUrl } from '../types'
+import { getScoreColor, getRelevanceColor, getNetworkExplorerUrl } from '../types'
 import { ScoreBadge } from './ScoreBadge'
 import { FunctionRow } from './FunctionRow'
 
@@ -18,7 +18,7 @@ const networkLabel: Record<string, string> = {
 
 export function ContractDetailPanel({ contract, functions, onClose }: ContractDetailPanelProps) {
   const secColor  = getScoreColor(contract.securityScore)
-  const critColor = getCriticalidadeColor(contract.criticidade)
+  const critColor = getRelevanceColor(contract.relevance)
   const stateFns  = functions.filter(f => !f.isView)
   const viewFns   = functions.filter(f => f.isView)
 
@@ -98,19 +98,19 @@ export function ContractDetailPanel({ contract, functions, onClose }: ContractDe
         >
           <div>
             <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 3 }}>
-              SEGURANÇA
+              SECURITY
             </div>
             <ScoreBadge score={contract.securityScore} color={secColor}  size="md" />
           </div>
           <div>
             <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 3 }}>
-              CRITICIDADE
+              RELEVANCE
             </div>
-            <ScoreBadge score={contract.criticidade}  color={critColor} size="md" />
+            <ScoreBadge score={contract.relevance}  color={critColor} size="md" />
           </div>
           <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
             <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 3 }}>
-              REPOSITÓRIO
+              REPOSITORY
             </div>
             <span style={{ fontFamily: 'Courier New', fontSize: 10, color: '#b0b0d8' }}>
               {contract.repository}
@@ -131,7 +131,7 @@ export function ContractDetailPanel({ contract, functions, onClose }: ContractDe
                 paddingBottom: 4,
               }}
             >
-              ENDEREÇOS
+              ADDRESSES
             </div>
             {contract.addresses.filter(a => a.address).map(a => {
               const url = getNetworkExplorerUrl(a.network, a.address)
@@ -189,7 +189,7 @@ export function ContractDetailPanel({ contract, functions, onClose }: ContractDe
                 paddingBottom: 4,
               }}
             >
-              FUNÇÕES STATE ({stateFns.length})
+              STATE FUNCTIONS ({stateFns.length})
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {stateFns.map(fn => (
@@ -212,7 +212,7 @@ export function ContractDetailPanel({ contract, functions, onClose }: ContractDe
                 paddingBottom: 4,
               }}
             >
-              FUNÇÕES VIEW ({viewFns.length})
+              VIEW FUNCTIONS ({viewFns.length})
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {viewFns.map(fn => (

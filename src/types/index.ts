@@ -2,7 +2,7 @@ export interface Layer {
   id: string
   name: string
   securityScore: number
-  criticidade: number
+  relevance: number
   contractIds: string[]
 }
 
@@ -17,7 +17,7 @@ export interface Contract {
   repository: string
   layerId: string
   securityScore: number
-  criticidade: number
+  relevance: number
   addresses: ContractAddress[]
 }
 
@@ -30,20 +30,21 @@ export interface SparkFunction {
   isView: boolean
   mainRisk: string
   concentration: string
-  limites: 'Sim' | 'Não' | 'Parcial' | 'N/A'
-  delay: 'Sim' | 'Não' | 'Parcial' | 'N/A'
-  acesso: 1 | 2 | 3
-  limitesScore: 1 | 2 | 3
-  verificabilidade: 1 | 2 | 3
+  limits: string
+  delay: string
+  access: 1 | 2 | 3
+  limitsScore: 1 | 2 | 3
+  verifiability: 1 | 2 | 3
   delayScore: 1 | 2 | 3
-  impact: number
+  relevance: number
+  description: string
   worstCase?: string
 }
 
 export interface Top30Entry {
   rank: number
   functionId: string
-  impact: number
+  relevance: number
   securityScore: number
   worstCase?: string
 }
@@ -56,7 +57,7 @@ export function getScoreColor(score: number): ScoreColor {
   return 'green'
 }
 
-export function getCriticalidadeColor(value: number): ScoreColor {
+export function getRelevanceColor(value: number): ScoreColor {
   if (value >= 8) return 'red'
   if (value >= 4) return 'yellow'
   return 'green'

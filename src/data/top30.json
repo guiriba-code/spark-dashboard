@@ -2,211 +2,211 @@
   {
     "rank": 1,
     "functionId": "almproxy-dodelegatecall",
-    "impact": 4,
     "securityScore": 2,
-    "worstCase": "CONTROLLER comprometido executa doDelegateCall com endereço de contrato malicioso pré-deployado. O contrato malicioso roda no storage do ALMProxy, chama approve e transfer em todos os tokens ERC-20 detidos pelo proxy. Em uma única transação, todo o TVL do ALMProxy — potencialmente centenas de milhões — é transferido para endereço do atacante. Não há limite de valor, não há validação do endereço, não há reversibilidade."
+    "worstCase": "Compromised CONTROLLER executes doDelegateCall with a pre-deployed malicious contract address. The malicious contract runs in the ALMProxy storage context, calling approve and transfer on all ERC-20 tokens held by the proxy. In a single transaction, the entire ALMProxy TVL — potentially hundreds of millions — is transferred to the attacker address. No value limit, no address validation, no reversibility.",
+    "relevance": 10
   },
   {
     "rank": 2,
     "functionId": "almproxy-docall",
-    "impact": 4,
     "securityScore": 2,
-    "worstCase": "CONTROLLER comprometido executa doCall passando como target um token ERC-20 e como calldata approve(attacker, MAX). O processo pode ser repetido para cada token no proxy em chamadas sucessivas. A ausência total de validação on-chain do target e da calldata torna o vetor idêntico ao padrão Giddy (hack 2022)."
+    "worstCase": "Compromised CONTROLLER executes doCall passing an ERC-20 token as target and approve(attacker, MAX) as calldata. The process can be repeated for each token in the proxy in successive calls. The complete absence of on-chain validation of target and calldata makes the vector identical to the Giddy pattern (2022 hack).",
+    "relevance": 10
   },
   {
     "rank": 3,
     "functionId": "almproxy-docallwithvalue",
-    "impact": 4,
     "securityScore": 2,
-    "worstCase": "Igual a doCall, mais drenagem de ETH nativo. ETH enviado a contrato sem função de recuperação é irrecuperável. Em sistemas com ALM cross-chain que mantêm ETH para gas, o vetor destrói também a capacidade operacional."
+    "worstCase": "Same as doCall, plus native ETH drainage. ETH sent to a contract with no recovery function is permanently lost. In systems with cross-chain ALM that hold ETH for gas, the vector also destroys operational capacity.",
+    "relevance": 10
   },
   {
     "rank": 4,
     "functionId": "sparklendconduit-setroles",
-    "impact": 4,
-    "securityScore": 3,
-    "worstCase": "Roles contract malicioso retorna true para qualquer canCall. Qualquer endereço passa a poder depositar/sacar do conduit sem restrição, drenando toda a liquidez D3M — potencialmente centenas de milhões de DAI/USDS depositados pelo MakerDAO."
+    "securityScore": 2,
+    "worstCase": "Malicious roles contract returns true for any canCall. Any address can deposit/withdraw from the conduit without restriction, draining all D3M liquidity — potentially hundreds of millions of DAI/USDS deposited by MakerDAO.",
+    "relevance": 10
   },
   {
     "rank": 5,
     "functionId": "usdcvault-upgradetocall",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Nova implementação inclui função de emergência que transfere todos os ativos do vault para endereço hardcoded do atacante. Usuários com shares perdem depósitos em USDC imediatamente. O vault pode operar em L1+L2 simultaneamente — o dano pode ser paralelo."
+    "worstCase": "New implementation includes an emergency function that transfers all vault assets to the attacker hardcoded address. Users with shares lose their USDC deposits immediately. The vault can operate on L1+L2 simultaneously — the damage can be parallel.",
+    "relevance": 10
   },
   {
     "rank": 6,
     "functionId": "pool-setconfiguration",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Bitmap crafted zera o liquidationThreshold de ETH. Todas as posições usando ETH como colateral tornam-se liquidáveis imediatamente. Bots automatizados disparam liquidações em cascata no mesmo bloco, levando a bad debt generalizado."
+    "worstCase": "Crafted bitmap zeroes the liquidationThreshold for ETH. All positions using ETH as collateral become immediately liquidatable. Automated bots trigger cascade liquidations in the same block, leading to widespread bad debt.",
+    "relevance": 10
   },
   {
     "rank": 7,
     "functionId": "poolconfigurator-updateatoken",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Nova implementação do aToken sobrescreve burn() para transferir o underlying para endereço do atacante antes de retornar. Todos os saques passam a drenar para o atacante. O dano afeta simultaneamente todos os depositantes daquele ativo."
+    "worstCase": "New aToken implementation overrides burn() to transfer the underlying to the attacker address before returning. All withdrawals start draining to the attacker. The damage simultaneously affects all depositors of that asset.",
+    "relevance": 10
   },
   {
     "rank": 8,
     "functionId": "poolconfigurator-updatestabledebtoken",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Nova implementação retorna balanceOf=0 para o endereço do atacante, apagando sua dívida on-chain. Atacante havia tomado o máximo antes do upgrade e agora tem colateral intacto + dívida zerada = lucro equivalente ao total emprestado."
+    "worstCase": "New implementation returns balanceOf=0 for the attacker address, erasing their on-chain debt. The attacker had borrowed the maximum before the upgrade and now has intact collateral + zeroed debt = profit equal to the total borrowed amount.",
+    "relevance": 10
   },
   {
     "rank": 9,
     "functionId": "poolconfigurator-updatevariabledebtoken",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Mesmo vetor do StableDebtToken, mas a taxa variável é usada pela maioria dos tomadores. Nova implementação manipula rayMul de acumulação de juros para 100%/bloco — todas as posições ativas tornam-se instantaneamente insolventes."
+    "worstCase": "Same vector as StableDebtToken, but the variable rate is used by most borrowers. New implementation manipulates the interest accrual rayMul to 100%/block — all active positions become instantly insolvent.",
+    "relevance": 10
   },
   {
     "rank": 10,
     "functionId": "usdcvault-rely",
-    "impact": 4,
     "securityScore": 3,
-    "worstCase": "Ward existente comprometido adiciona endereço malicioso como novo ward. Novo ward imediatamente executa upgradeToAndCall com implementação backdoored. O rely é o vetor de entrada — sem limite de wards, atacante mantém persistência mesmo após o ward comprometido ser removido via deny."
+    "worstCase": "Compromised existing ward adds a malicious address as a new ward. New ward immediately executes upgradeToAndCall with a backdoored implementation. The rely is the entry vector — with no ward limit, the attacker maintains persistence even after the compromised ward is removed via deny.",
+    "relevance": 10
   },
   {
     "rank": 11,
     "functionId": "executor-queue",
-    "impact": 4,
     "securityScore": 5,
-    "worstCase": "SUBMISSION_ROLE comprometida enfileira: (1) setACLManager apontando para contrato que retorna true para qualquer role check; (2) setPoolImpl com implementação backdoored; (3) transferência do tesouro. Após o delay, Executor executa automaticamente. A única defesa é o GUARDIAN_ROLE cancelar antes."
+    "worstCase": "Compromised SUBMISSION_ROLE queues: (1) setACLManager pointing to a contract that returns true for any role check; (2) setPoolImpl with backdoored implementation; (3) treasury transfer. After the delay, Executor executes automatically. The only defense is GUARDIAN_ROLE canceling before expiry.",
+    "relevance": 10
   },
   {
     "rank": 12,
     "functionId": "poolconfigurator-initreserves",
-    "impact": 4,
     "securityScore": 5,
-    "worstCase": "Token malicioso com função transfer() reentrante listado com LTV=80%, sem supply cap. Atacante deposita o token, manipula o estado do Pool via reentrância durante supply/liquidation, drena ativos reais. Tokens com comportamento não-ERC20-padrão amplificam o dano."
+    "worstCase": "Malicious token with a reentrant transfer() function listed with LTV=80%, no supply cap. Attacker deposits the token, manipulates Pool state via reentrancy during supply/liquidation, drains real assets. Tokens with non-standard ERC-20 behavior amplify the damage.",
+    "relevance": 10
   },
   {
     "rank": 13,
     "functionId": "poolconfigurator-configurereserveas",
-    "impact": 4,
     "securityScore": 5,
-    "worstCase": "RISK_ADMIN comprometido seta liquidationThreshold=0 para WBTC. Todas as posições WBTC tornam-se liquidáveis. Liquidadores automatizados executam em cascata no mesmo bloco. Posições parcialmente liquidadas geram bad debt irrecuperável."
+    "worstCase": "Compromised RISK_ADMIN sets liquidationThreshold=0 for WBTC. All WBTC positions become liquidatable. Automated liquidators execute in cascade in the same block. Partially liquidated positions generate unrecoverable bad debt.",
+    "relevance": 10
   },
   {
     "rank": 14,
     "functionId": "pooladdressesprovider-setpriceoracle",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Governança comprometida substitui oráculo por contrato que retorna preços inflados para ETH. Atacante deposita ETH inflado, toma máximo emprestado de stables, sai. Alternativamente, preços zerados disparam liquidações de TODAS as posições em todos os ativos simultaneamente."
+    "worstCase": "Compromised governance replaces oracle with a contract returning inflated prices for ETH. Attacker deposits inflated ETH, borrows the maximum in stables, and exits. Alternatively, zeroed prices trigger liquidations of ALL positions across all assets simultaneously.",
+    "relevance": 10
   },
   {
     "rank": 15,
     "functionId": "pooladdressesprovider-setaclmanager",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Novo ACLManager deployed com isPoolAdmin(), isRiskAdmin(), isEmergencyAdmin() retornando true para qualquer endereço. Após a substituição, qualquer EOA pode executar initReserves, updateAToken, setPoolPause. O protocolo inteiro está comprometido sem precisar de roles legítimas."
+    "worstCase": "New ACLManager deployed with isPoolAdmin(), isRiskAdmin(), isEmergencyAdmin() returning true for any address. After replacement, any EOA can execute initReserves, updateAToken, setPoolPause. The entire protocol is compromised without needing legitimate roles.",
+    "relevance": 10
   },
   {
     "rank": 16,
     "functionId": "executor-executedelegatecall",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Código executado via delegatecall no Executor redefine delay=0, remove GUARDIAN_ROLE e transfere ETH. Com delay=0, qualquer ação enfileirada via queue é executável instantaneamente — sem janela de defesa para a comunidade reagir."
+    "worstCase": "Code executed via delegatecall in the Executor sets delay=0, removes GUARDIAN_ROLE, and transfers ETH. With delay=0, any action queued via queue is executable instantly — no defense window for the community to react.",
+    "relevance": 10
   },
   {
     "rank": 17,
     "functionId": "pooladdressesprovider-setaddress",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Chave POOL substituída por contrato malicioso que imita a interface do Pool mas redireciona todos os supply/borrow para drenar o usuário. Frontends legítimos resolvem o endereço do Pool via PoolAddressesProvider — usuários interagem sem saber com o contrato malicioso."
+    "worstCase": "The POOL key is replaced by a malicious contract that mimics the Pool interface but redirects all supply/borrow to drain the user. Legitimate frontends resolve the Pool address via PoolAddressesProvider — users unknowingly interact with the malicious contract.",
+    "relevance": 10
   },
   {
     "rank": 18,
     "functionId": "pooladdressesprovider-setaddressasproxy",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Backdoor alternativo para setPoolImpl — usa setAddressAsProxy(POOL, maliciousImpl) contornando monitoramento específico de setPoolImpl. Nova implementação controla 100% dos depósitos e empréstimos. Pode substituir contratos sem upgrade dedicado."
+    "worstCase": "Alternative backdoor to setPoolImpl — uses setAddressAsProxy(POOL, maliciousImpl) bypassing specific monitoring of setPoolImpl. New implementation controls 100% of deposits and loans. Can replace contracts without a dedicated upgrade.",
+    "relevance": 10
   },
   {
     "rank": 19,
     "functionId": "pooladdressesprovider-setpoolimpl",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Nova implementação do Pool inclui backdoorWithdraw(address to) sem restrições. Após upgrade, drenagem de todos os ativos de todas as reservas simultaneamente. O Pool detém os ativos reais — comprometimento = comprometimento do cofre inteiro do protocolo."
+    "worstCase": "New Pool implementation includes backdoorWithdraw(address to) with no restrictions. After upgrade, drains all assets from all reserves simultaneously. The Pool holds the real assets — a compromise is equivalent to compromising the entire protocol treasury.",
+    "relevance": 10
   },
   {
     "rank": 20,
     "functionId": "pooladdressesprovider-setpoolconfiguratorimpl",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Novo PoolConfigurator remove verificações de role de todas as funções. Qualquer EOA pode listar tokens maliciosos, fazer upgrade de aTokens e pausar/despausar reservas. É uma pré-condição para múltiplos outros ataques."
+    "worstCase": "New PoolConfigurator removes role checks from all functions. Any EOA can list malicious tokens, upgrade aTokens, and pause/unpause reserves. It is a precondition for multiple other attacks.",
+    "relevance": 10
   },
   {
     "rank": 21,
     "functionId": "sparkvault-upgradetocall",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Nova implementação redireciona withdraw/redeem para endereço do atacante. O vault continua aparentando funcionar normalmente para deposits, atraindo novos depósitos para o contrato comprometido enquanto saques são drenados silenciosamente."
+    "worstCase": "New implementation redirects withdraw/redeem to the attacker address. The vault continues appearing to function normally for deposits, attracting new deposits to the compromised contract while withdrawals are silently drained.",
+    "relevance": 10
   },
   {
     "rank": 22,
     "functionId": "otcbuffer-upgradetocall",
-    "impact": 4,
     "securityScore": 6,
-    "worstCase": "Nova implementação chama approve(attacker, MAX) em todos os tokens do buffer. Atacante executa transferFrom em seguida. O timing no momento de maior saldo do buffer (alta atividade cross-chain) maximiza o dano."
+    "worstCase": "New implementation calls approve(attacker, MAX) on all buffer tokens. Attacker then executes transferFrom. Timing at the moment of maximum buffer balance (high cross-chain activity) maximizes damage.",
+    "relevance": 10
   },
   {
     "rank": 23,
     "functionId": "aclmanager-addbridge",
-    "impact": 4,
     "securityScore": 7,
-    "worstCase": "Bridge malicioso recebe BRIDGE_ROLE. Imediatamente chama mintUnbacked(USDC, unbackedMintCap). aTokens fictícios são resgatados por USDC real dos depositantes. Dano máximo limitado pelo unbackedMintCap — mas em configurações com cap alto pode atingir dezenas de milhões."
+    "worstCase": "Malicious bridge receives BRIDGE_ROLE. Immediately calls mintUnbacked(USDC, unbackedMintCap). Phantom aTokens are redeemed for real USDC from depositors. Maximum damage is capped by the unbackedMintCap — but in configurations with a high cap can reach tens of millions.",
+    "relevance": 10
   },
   {
     "rank": 24,
     "functionId": "aclmanager-addpooladmin",
-    "impact": 4,
     "securityScore": 8,
-    "worstCase": "Endereço malicioso com POOL_ADMIN executa sequência: updateAToken(WETH, backdooredImpl) + initReserves(maliciousToken) + rescueTokens. O POOL_ADMIN é a role com maior leque de ações destrutivas — comprometê-la equivale ao comprometimento funcional do protocolo inteiro."
+    "worstCase": "Malicious address with POOL_ADMIN executes sequence: updateAToken(WETH, backdooredImpl) + initReserves(maliciousToken) + rescueTokens. POOL_ADMIN is the role with the widest range of destructive actions — compromising it is functionally equivalent to compromising the entire protocol.",
+    "relevance": 10
   },
   {
     "rank": 25,
     "functionId": "pooladdressesprovider-setaclAdmin",
-    "impact": 4,
     "securityScore": 8,
-    "worstCase": "Endereço malicioso torna-se DEFAULT_ADMIN_ROLE. Executa setRoleAdmin(POOL_ADMIN_ROLE, ATTACKER_ROLE) + grantRole(POOL_ADMIN_ROLE, attacker). Escalada de privilégio total em 2 passos. É a chave mestra da hierarquia de controle de acesso."
+    "worstCase": "Malicious address becomes DEFAULT_ADMIN_ROLE. Executes setRoleAdmin(POOL_ADMIN_ROLE, ATTACKER_ROLE) + grantRole(POOL_ADMIN_ROLE, attacker). Full privilege escalation in 2 steps. It is the master key of the access control hierarchy.",
+    "relevance": 10
   },
   {
     "rank": 26,
     "functionId": "pooladdressesprovider-transferownership",
-    "impact": 4,
     "securityScore": 9,
-    "worstCase": "Novo owner malicioso executa em sequência: setPoolImpl + setACLManager + setAddressAsProxy para implementações backdoored. O novo owner não precisa de nenhuma outra aprovação — é a chave mestra do protocolo. Com Timelock como proteção, o spell deve ser cancelado antes do delay expirar."
+    "worstCase": "Malicious new owner executes in sequence: setPoolImpl + setACLManager + setAddressAsProxy with backdoored implementations. The new owner requires no further approvals — it is the protocol master key. With Timelock as protection, the spell must be canceled before the delay expires.",
+    "relevance": 10
   },
   {
     "rank": 27,
     "functionId": "aclmanager-setRoleAdmin",
-    "impact": 4,
     "securityScore": 9,
-    "worstCase": "Governança comprometida executa setRoleAdmin(POOL_ADMIN_ROLE, ATTACKER_ROLE). Atacante com ATTACKER_ROLE passa a controlar quem tem POOL_ADMIN sem precisar ser DEFAULT_ADMIN. Escalada de privilégio encoberta — mais difícil de detectar que grantRole direto."
+    "worstCase": "Compromised governance executes setRoleAdmin(POOL_ADMIN_ROLE, ATTACKER_ROLE). Attacker with ATTACKER_ROLE then controls who holds POOL_ADMIN without needing DEFAULT_ADMIN. Covert privilege escalation — harder to detect than direct grantRole.",
+    "relevance": 10
   },
   {
     "rank": 28,
     "functionId": "aclmanager-grantrole",
-    "impact": 4,
     "securityScore": 9,
-    "worstCase": "Governança comprometida concede DEFAULT_ADMIN_ROLE a endereço malicioso via grantRole. Com DEFAULT_ADMIN, o atacante controla toda a hierarquia de roles — pode conceder POOL_ADMIN, RISK_ADMIN, EMERGENCY_ADMIN a qualquer endereço sem nenhuma aprovação adicional."
+    "worstCase": "Compromised governance grants DEFAULT_ADMIN_ROLE to a malicious address via grantRole. With DEFAULT_ADMIN, the attacker controls the entire role hierarchy — can grant POOL_ADMIN, RISK_ADMIN, EMERGENCY_ADMIN to any address with no further approvals.",
+    "relevance": 10
   },
   {
     "rank": 29,
     "functionId": "pooladdressesprovider-renounceownership",
-    "impact": 4,
     "securityScore": 10,
-    "worstCase": "Após renounceOwnership, nenhuma função onlyOwner pode jamais ser chamada. Upgrades de emergência são impossíveis para sempre. Se uma vulnerabilidade crítica for descoberta no Pool, o protocolo não tem como corrigi-la via proxy upgrade. Score 10 porque os controles estão todos presentes — o risco é o impacto irreversível, não a facilidade de exploração."
+    "worstCase": "After renounceOwnership, no onlyOwner function can ever be called. Emergency upgrades are permanently impossible. If a critical vulnerability is discovered in the Pool, the protocol cannot fix it via proxy upgrade. Score 10 because all controls are present — the risk is the irreversible impact, not ease of exploitation.",
+    "relevance": 10
   },
   {
     "rank": 30,
     "functionId": "ratelimits-setunlimited",
-    "impact": 3,
     "securityScore": 7,
-    "worstCase": "Admin remove rate limit de transferAsset. RELAYER comprometido drena o ALMProxy inteiro em uma única transação — sem o rate limit como contenção, o dano máximo é o TVL completo do proxy, não apenas o limite por período."
+    "worstCase": "Admin removes the transferAsset rate limit. Compromised RELAYER drains the entire ALMProxy in a single transaction — without the rate limit as containment, the maximum damage is the full proxy TVL, not just the per-period limit.",
+    "relevance": 7
   }
 ]

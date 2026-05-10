@@ -1,6 +1,6 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
-import { getScoreColor, getCriticalidadeColor, getNetworkExplorerUrl } from '../types'
+import { getScoreColor, getRelevanceColor, getNetworkExplorerUrl } from '../types'
 import type { Contract, SparkFunction } from '../types'
 import { ScoreBadge, DotIndicator } from './ScoreBadge'
 import { FunctionRow } from './FunctionRow'
@@ -15,7 +15,7 @@ const networkLabel = { mainnet: 'ETH', base: 'Base', arbitrum: 'Arb' }
 export function ContractCard({ contract, functions }: ContractCardProps) {
   const [open, setOpen] = useState(false)
   const secColor = getScoreColor(contract.securityScore)
-  const critColor = getCriticalidadeColor(contract.criticidade)
+  const critColor = getRelevanceColor(contract.relevance)
   const stateFns = functions.filter(f => !f.isView)
   const viewFns = functions.filter(f => f.isView)
 
@@ -63,12 +63,12 @@ export function ContractCard({ contract, functions }: ContractCardProps) {
 
         <div className="flex items-center gap-3 flex-shrink-0">
           <div className="text-right">
-            <p className="text-xs text-[#6b6b80] mb-0.5">Segurança</p>
+            <p className="text-xs text-[#6b6b80] mb-0.5">Security</p>
             <ScoreBadge score={contract.securityScore} color={secColor} size="sm" />
           </div>
           <div className="text-right">
-            <p className="text-xs text-[#6b6b80] mb-0.5">Criticidade</p>
-            <ScoreBadge score={contract.criticidade} color={critColor} size="sm" />
+            <p className="text-xs text-[#6b6b80] mb-0.5">Relevance</p>
+            <ScoreBadge score={contract.relevance} color={critColor} size="sm" />
           </div>
           <span className="text-xs text-[#3a3a48]">{stateFns.length}f</span>
         </div>

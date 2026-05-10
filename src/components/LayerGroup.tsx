@@ -1,6 +1,6 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { ChevronDown, ChevronRight } from 'lucide-react'
-import { getScoreColor, getCriticalidadeColor } from '../types'
+import { getScoreColor, getRelevanceColor } from '../types'
 import type { Layer, Contract, SparkFunction } from '../types'
 import { ScoreBadge, DotIndicator } from './ScoreBadge'
 import { ContractCard } from './ContractCard'
@@ -14,7 +14,7 @@ interface LayerGroupProps {
 export function LayerGroup({ layer, contracts, functions }: LayerGroupProps) {
   const [open, setOpen] = useState(false)
   const secColor = getScoreColor(layer.securityScore)
-  const critColor = getCriticalidadeColor(layer.criticidade)
+  const critColor = getRelevanceColor(layer.relevance)
 
   const layerContracts = contracts.filter(c => c.layerId === layer.id)
 
@@ -33,18 +33,18 @@ export function LayerGroup({ layer, contracts, functions }: LayerGroupProps) {
         <div className="flex-1 min-w-0">
           <h3 className="text-base font-semibold text-[#e8e8f0]">{layer.name}</h3>
           <p className="text-xs text-[#6b6b80] mt-0.5">
-            {layerContracts.length} contrato{layerContracts.length !== 1 ? 's' : ''}
+            {layerContracts.length} contract{layerContracts.length !== 1 ? 's' : ''}
           </p>
         </div>
 
         <div className="flex items-center gap-4 flex-shrink-0">
           <div className="text-right">
-            <p className="text-xs text-[#6b6b80] mb-1">Segurança média</p>
+            <p className="text-xs text-[#6b6b80] mb-1">Average security</p>
             <ScoreBadge score={layer.securityScore} color={secColor} size="md" />
           </div>
           <div className="text-right">
-            <p className="text-xs text-[#6b6b80] mb-1">Criticidade</p>
-            <ScoreBadge score={layer.criticidade} color={critColor} size="md" />
+            <p className="text-xs text-[#6b6b80] mb-1">Relev�ncia</p>
+            <ScoreBadge score={layer.relevance} color={critColor} size="md" />
           </div>
         </div>
       </button>

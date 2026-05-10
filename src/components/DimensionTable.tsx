@@ -1,4 +1,4 @@
-import { getScoreColor } from '../types'
+﻿import { getScoreColor } from '../types'
 import type { SparkFunction } from '../types'
 import { ScoreBadge } from './ScoreBadge'
 
@@ -7,41 +7,41 @@ interface DimensionTableProps {
 }
 
 const dimensionLabels: Record<string, string> = {
-  acesso:           'Acesso',
-  limitesScore:     'Limites',
-  verificabilidade: 'Verificabilidade',
-  delayScore:       'Delay',
+  access:       'Access',
+  limitsScore:  'Limits',
+  verifiability:'Verifiability',
+  delayScore:   'Delay',
 }
 
 const dimensionDesc: Record<string, Record<number, string>> = {
-  acesso: {
-    1: 'Chave única / bot / role direta sem delay',
-    2: 'Multisig ou role com acesso agrupado',
-    3: 'Timelock on-chain + governança OU permissionless',
+  access: {
+    1: 'Single key / bot / direct role without delay',
+    2: 'Multisig or role with grouped access',
+    3: 'On-chain Timelock + governance OR permissionless',
   },
-  limitesScore: {
-    1: 'Sem limites — exposição financeira desprotegida',
-    2: 'Limites parciais ou contornáveis',
-    3: 'Limites rigorosos OU sem exposição financeira (N/A)',
+  limitsScore: {
+    1: 'No limits — unprotected financial exposure',
+    2: 'Partial or bypassable limits',
+    3: 'Strict limits OR no financial exposure (N/A)',
   },
-  verificabilidade: {
-    1: 'Sem validação — calldata / endereço / amount arbitrário',
-    2: 'Validação parcial (alguns parâmetros)',
-    3: 'Determinística ou valida todos os inputs',
+  verifiability: {
+    1: 'No validation — arbitrary calldata / address / amount',
+    2: 'Partial validation (some parameters)',
+    3: 'Deterministic or validates all inputs',
   },
   delayScore: {
-    1: 'Precisa de delay — nenhum existe',
-    2: 'Delay parcial (rate limit / multisig)',
-    3: 'Timelock presente OU não precisa (N/A)',
+    1: 'Delay required — none exists',
+    2: 'Partial delay (rate limit / multisig)',
+    3: 'Timelock present OR not required (N/A)',
   },
 }
 
 export function DimensionTable({ fn }: DimensionTableProps) {
   const dimensions = [
-    { key: 'acesso',           value: fn.acesso           },
-    { key: 'limitesScore',     value: fn.limitesScore     },
-    { key: 'verificabilidade', value: fn.verificabilidade },
-    { key: 'delayScore',       value: fn.delayScore       },
+    { key: 'access',        value: fn.access        },
+    { key: 'limitsScore',   value: fn.limitsScore   },
+    { key: 'verifiability', value: fn.verifiability },
+    { key: 'delayScore',    value: fn.delayScore    },
   ] as const
 
   return (
@@ -49,7 +49,7 @@ export function DimensionTable({ fn }: DimensionTableProps) {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
         <thead>
           <tr style={{ background: '#0a0a18', borderBottom: '1px solid #1a1a3a' }}>
-            {['DIMENSÃO', 'SCORE', 'AVALIAÇÃO'].map(h => (
+            {['DIMENSION', 'SCORE', 'ASSESSMENT'].map(h => (
               <th
                 key={h}
                 style={{
@@ -116,7 +116,7 @@ export function DimensionTable({ fn }: DimensionTableProps) {
                 fontWeight: 'bold',
               }}
             >
-              Score Final
+              Final Score
             </td>
             <td style={{ padding: '5px 8px', textAlign: 'center' }}>
               <ScoreBadge score={fn.score} color={getScoreColor(fn.score)} size="sm" />
@@ -129,7 +129,7 @@ export function DimensionTable({ fn }: DimensionTableProps) {
                 color: '#9090c0',
               }}
             >
-              ({fn.acesso}+{fn.limitesScore}+{fn.verificabilidade}+{fn.delayScore})−2 = {fn.score}
+              ({fn.access}+{fn.limitsScore}+{fn.verifiability}+{fn.delayScore})−2 = {fn.score}
             </td>
           </tr>
         </tfoot>

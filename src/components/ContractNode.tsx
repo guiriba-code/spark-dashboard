@@ -1,8 +1,8 @@
-import { memo } from 'react'
+﻿import { memo } from 'react'
 import { Handle, Position } from '@xyflow/react'
 import type { NodeProps, Node } from '@xyflow/react'
 import type { Contract } from '../types'
-import { getScoreColor, getCriticalidadeColor, getNetworkExplorerUrl } from '../types'
+import { getScoreColor, getRelevanceColor, getNetworkExplorerUrl } from '../types'
 import { ScoreBadge } from './ScoreBadge'
 
 export type ContractNodeData = {
@@ -21,7 +21,7 @@ const networkShort: Record<string, string> = {
 function ContractNodeComponent({ data }: NodeProps<ContractNodeType>) {
   const { contract, selected } = data
   const secColor  = getScoreColor(contract.securityScore)
-  const critColor = getCriticalidadeColor(contract.criticidade)
+  const critColor = getRelevanceColor(contract.relevance)
 
   const borderHighlight = selected ? '#00ff41' : '#404040'
   const borderLight     = selected ? '#88ff88' : '#808080'
@@ -32,7 +32,7 @@ function ContractNodeComponent({ data }: NodeProps<ContractNodeType>) {
   return (
     <div
       style={{
-        width: 168,
+        width: 200,
         borderTop:    `2px solid ${borderLight}`,
         borderLeft:   `2px solid ${borderLight}`,
         borderRight:  `2px solid ${borderHighlight}`,
@@ -57,12 +57,14 @@ function ContractNodeComponent({ data }: NodeProps<ContractNodeType>) {
       >
         <span
           style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: '5px',
+            fontFamily: 'Courier New, monospace',
+            fontSize: '10px',
+            fontWeight: 'bold',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
-            maxWidth: 120,
+            maxWidth: 160,
+            color: selected ? '#00ff41' : '#e0e0ff',
           }}
         >
           {contract.name}
@@ -88,14 +90,14 @@ function ContractNodeComponent({ data }: NodeProps<ContractNodeType>) {
           {contract.repository}
         </div>
 
-        <div style={{ display: 'flex', gap: 6, marginBottom: 5 }}>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 5 }}>
           <div>
-            <div style={{ fontFamily: 'Courier New', fontSize: 8, color: '#9090c0' }}>SEG</div>
+            <div style={{ fontFamily: 'Courier New', fontSize: 8, color: '#9090c0', marginBottom: 2 }}>Security</div>
             <ScoreBadge score={contract.securityScore} color={secColor}  size="sm" />
           </div>
           <div>
-            <div style={{ fontFamily: 'Courier New', fontSize: 8, color: '#9090c0' }}>CRIT</div>
-            <ScoreBadge score={contract.criticidade}  color={critColor} size="sm" />
+            <div style={{ fontFamily: 'Courier New', fontSize: 8, color: '#9090c0', marginBottom: 2 }}>Relevance</div>
+            <ScoreBadge score={contract.relevance}  color={critColor} size="sm" />
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
 import { getScoreColor, getNetworkExplorerUrl } from '../types'
 import type { SparkFunction, Contract } from '../types'
@@ -10,16 +10,23 @@ interface InsecureTabProps {
   contracts: Contract[]
 }
 
-type StatusVal = 'Sim' | 'Não' | 'Parcial' | 'N/A'
+type StatusVal = 'Yes' | 'No' | 'Partial' | 'N/A'
 
-function SBadge({ value, label }: { value: StatusVal; label: string }) {
+function normalizeStatus(value: string): StatusVal {
+  if (value.startsWith('Yes'))     return 'Yes'
+  if (value.startsWith('No'))      return 'No'
+  if (value.startsWith('Partial')) return 'Partial'
+  return 'N/A'
+}
+
+function SBadge({ value, label }: { value: string; label: string }) {
   const m: Record<StatusVal, string> = {
-    'Sim':     '#002200/#00ff41/#00ff4140',
-    'Não':     '#2a0000/#ff3333/#ff333340',
-    'Parcial': '#2a1a00/#ffcc00/#ffcc0040',
+    'Yes':     '#002200/#00ff41/#00ff4140',
+    'No':      '#2a0000/#ff3333/#ff333340',
+    'Partial': '#2a1a00/#ffcc00/#ffcc0040',
     'N/A':     '#0a0a1a/#9090c0/#2a2a55',
   }
-  const [bg, text, border] = m[value].split('/')
+  const [bg, text, border] = m[normalizeStatus(value)].split('/')
   return (
     <span style={{ fontFamily: 'Courier New', fontSize: 9, padding: '1px 5px', background: bg, color: text, border: `1px solid ${border}`, fontWeight: 'bold' }}>
       {label}:{value}
@@ -57,12 +64,17 @@ function InsecureCard({ fn, contract, rank }: { fn: SparkFunction; contract: Con
               <span style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0' }}>{contract.name}</span>
             )}
           </div>
+          <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5, marginBottom: 4 }}>
+            {fn.description && fn.description !== '-' && (
+              <span style={{ color: '#c8c8e8' }}>{fn.description}</span>
+            )}
+          </div>
           <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5, marginBottom: 8 }}>
             {fn.mainRisk}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
             <ScoreBadge score={fn.score} color={color} label="Score" size="sm" />
-            <SBadge value={fn.limites} label="L" />
+            <SBadge value={fn.limits} label="L" />
             <SBadge value={fn.delay}   label="D" />
             <span style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0' }}>{fn.permission}</span>
           </div>
@@ -80,21 +92,21 @@ function InsecureCard({ fn, contract, rank }: { fn: SparkFunction; contract: Con
         <div style={{ borderTop: '1px solid #1a1a3a', padding: '10px 12px', background: '#0a0a18', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
-              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 4 }}>POR QUE SEM LIMITES?</div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 4 }}>WHY NO LIMITS?</div>
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', lineHeight: 1.4 }}>
-                {fn.limites === 'Não'     ? 'Função com exposição financeira sem cap implementado'        :
-                 fn.limites === 'Parcial' ? 'Limites existem mas são contornáveis ou incompletos'         :
-                 fn.limites === 'N/A'     ? 'Sem exposição financeira — limites não aplicáveis'           :
-                                           'Limites rigorosos implementados'}
+                {fn.limits === 'No'      ? 'Function with financial exposure and no cap implemented' :
+                 fn.limits === 'Partial' ? 'Limits exist but are bypassable or incomplete'           :
+                 fn.limits === 'N/A'     ? 'No financial exposure — limits not applicable'           :
+                                          'Strict limits implemented'}
               </div>
             </div>
             <div style={{ border: '1px solid #1a1a3a', padding: 8 }}>
-              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 4 }}>POR QUE SEM DELAY?</div>
+              <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#9090c0', marginBottom: 4 }}>WHY NO DELAY?</div>
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 10, color: '#9090c0', lineHeight: 1.4 }}>
-                {fn.delay === 'Não'     ? 'Ação crítica executável imediatamente — sem janela de revisão' :
-                 fn.delay === 'Parcial' ? 'Rate limit temporal ou multisig, sem Timelock on-chain'        :
-                 fn.delay === 'N/A'     ? 'Permissionless, emergência ou já protegida por Timelock'       :
-                                         'Timelock on-chain implementado'}
+                {fn.delay === 'No'      ? 'Critical action executable immediately — no review window' :
+                 fn.delay === 'Partial' ? 'Temporal rate limit or multisig, no on-chain Timelock'     :
+                 fn.delay === 'N/A'     ? 'Permissionless, emergency, or already protected by Timelock' :
+                                         'On-chain Timelock implemented'}
               </div>
             </div>
           </div>
@@ -102,7 +114,7 @@ function InsecureCard({ fn, contract, rank }: { fn: SparkFunction; contract: Con
           {fn.worstCase && (
             <div style={{ border: '1px solid #3a0000', background: '#140000', padding: 10 }}>
               <div style={{ fontFamily: 'Courier New', fontSize: 9, color: '#ff3333', marginBottom: 6, fontWeight: 'bold' }}>
-                ⚠ PIOR CENÁRIO DE EXPLORAÇÃO
+                &#9888; WORST CASE EXPLOIT SCENARIO
               </div>
               <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#b0b0d8', lineHeight: 1.5 }}>
                 {fn.worstCase}
@@ -118,7 +130,7 @@ function InsecureCard({ fn, contract, rank }: { fn: SparkFunction; contract: Con
 export function InsecureTab({ functions, contracts }: InsecureTabProps) {
   const top20 = [...functions]
     .filter(f => !f.isView && f.score <= 5)
-    .sort((a, b) => a.score - b.score || b.impact - a.impact)
+    .sort((a, b) => a.score - b.score || b.relevance - a.relevance)
     .slice(0, 20)
 
   return (
@@ -135,17 +147,18 @@ export function InsecureTab({ functions, contracts }: InsecureTabProps) {
         }}
       >
         <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 8, color: '#ff3333', marginBottom: 6 }}>
-          TOP 20 FUNÇÕES MAIS INSEGURAS
+          TOP 20 MOST INSECURE FUNCTIONS
         </div>
         <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', fontSize: 11, color: '#9090c0' }}>
-          Ordenadas por score crescente (2 = mais inseguro). Inclui apenas funções state com score ≤ 5.
-          Expanda para ver ausência de Limites/Delay e pior cenário de exploração.
+          Sorted by ascending score (2 = most insecure). Includes only state functions with score &le; 5.
+          Expand to view absence of Limits/Delay and worst case exploit scenario.
         </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {top20.map((fn, i) => {
-          const contract = contracts.find(c => c.id === fn.contractId)!
+          const contract = contracts.find(c => c.id === fn.contractId)
+          if (!contract) return null
           return <InsecureCard key={fn.id} fn={fn} contract={contract} rank={i + 1} />
         })}
       </div>
