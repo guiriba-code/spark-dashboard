@@ -1,0 +1,58 @@
+[
+  {
+    "id": "governance",
+    "name": "Governança e Controle de Acesso",
+    "securityScore": 8.1,
+    "criticidade": 3.8,
+    "contractIds": ["executor", "aclmanager", "pooladdressesprovider"]
+  },
+  {
+    "id": "lending",
+    "name": "Empréstimos (SparkLend Core)",
+    "securityScore": 7.9,
+    "criticidade": 3.5,
+    "contractIds": ["pool", "poolconfigurator", "atoken", "stabledebttoken", "variabledebttoken"]
+  },
+  {
+    "id": "alm",
+    "name": "Liquidez e ALM",
+    "securityScore": 7.1,
+    "criticidade": 3.2,
+    "contractIds": ["almproxy", "mainnetcontroller", "foreigncontroller", "ratelimits", "otcbuffer"]
+  },
+  {
+    "id": "security",
+    "name": "Segurança e Emergência",
+    "securityScore": 9.0,
+    "criticidade": 2.5,
+    "contractIds": ["sparklendfreezermom", "killswitchoracle", "emergencyspells"]
+  },
+  {
+    "id": "automation",
+    "name": "Automação",
+    "securityScore": 8.3,
+    "criticidade": 2.2,
+    "contractIds": ["capautomator", "resolvers"]
+  },
+  {
+    "id": "oracles",
+    "name": "Oráculos",
+    "securityScore": 8.5,
+    "criticidade": 2.8,
+    "contractIds": ["morphoUpgradableOracle", "ssrauthOracle", "ssrmainnetOracle"]
+  },
+  {
+    "id": "crosschain",
+    "name": "Cross-chain",
+    "securityScore": 7.5,
+    "criticidade": 2.6,
+    "contractIds": ["xchainhelpersreceivers", "sparkpsm"]
+  },
+  {
+    "id": "rewards",
+    "name": "Recompensas e Vesting",
+    "securityScore": 8.0,
+    "criticidade": 2.4,
+    "contractIds": ["sparkrewards", "dssvest", "savingsvaultintents", "sparkvault", "usdcvault"]
+  }
+]

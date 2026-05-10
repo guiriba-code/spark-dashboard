@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-base: #0e0e12;
+  --color-card: #16161d;
+  --color-card-hover: #1e1e28;
+  --color-border: #2a2a35;
+  --color-border-light: #3a3a48;
+  --color-text: #e8e8f0;
+  --color-muted: #6b6b80;
+  --color-muted-light: #9494a8;
+  --color-red: #ef4444;
+  --color-red-bg: #3f1212;
+  --color-yellow: #f59e0b;
+  --color-yellow-bg: #3f2d0a;
+  --color-green: #22c55e;
+  --color-green-bg: #0d2e1a;
+  --color-accent: #6366f1;
+  --color-accent-bg: #1e1f3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+.react-flow__background {
+  background-color: var(--color-base) !important;
+}
+.react-flow__edge-path {
+  stroke: var(--color-border-light) !important;
+}

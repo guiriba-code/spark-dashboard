@@ -1,0 +1,307 @@
+[
+  {
+    "id": "executor",
+    "name": "Executor",
+    "repository": "spark-gov-relay",
+    "layerId": "governance",
+    "securityScore": 8.2,
+    "criticidade": 3.5,
+    "addresses": [
+      { "network": "mainnet", "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c" }
+    ]
+  },
+  {
+    "id": "aclmanager",
+    "name": "ACLManager",
+    "repository": "sparklend-v1-core",
+    "layerId": "governance",
+    "securityScore": 8.8,
+    "criticidade": 3.8,
+    "addresses": [
+      { "network": "mainnet", "address": "0xdA135Cd78A086025BcdC87B038a1C462032b510C" }
+    ]
+  },
+  {
+    "id": "pooladdressesprovider",
+    "name": "PoolAddressesProvider",
+    "repository": "sparklend-v1-core",
+    "layerId": "governance",
+    "securityScore": 7.4,
+    "criticidade": 4.0,
+    "addresses": [
+      { "network": "mainnet", "address": "0x02C3eA4e34C0cBd694D2adFa2c690EECbC1793eE" }
+    ]
+  },
+  {
+    "id": "pool",
+    "name": "Pool",
+    "repository": "sparklend-v1-core",
+    "layerId": "lending",
+    "securityScore": 8.1,
+    "criticidade": 3.6,
+    "addresses": [
+      { "network": "mainnet", "address": "0xC13e21B648A5Ee794902342038FF3aDAB66BE987" }
+    ]
+  },
+  {
+    "id": "poolconfigurator",
+    "name": "PoolConfigurator",
+    "repository": "sparklend-v1-core",
+    "layerId": "lending",
+    "securityScore": 6.6,
+    "criticidade": 3.8,
+    "addresses": [
+      { "network": "mainnet", "address": "0x542DBa469bdE58FAeEA4F3d0dF2e1CdFe65cF6b" }
+    ]
+  },
+  {
+    "id": "atoken",
+    "name": "AToken",
+    "repository": "sparklend-v1-core",
+    "layerId": "lending",
+    "securityScore": 8.0,
+    "criticidade": 2.8,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "stabledebttoken",
+    "name": "StableDebtToken",
+    "repository": "sparklend-v1-core",
+    "layerId": "lending",
+    "securityScore": 9.0,
+    "criticidade": 2.0,
+    "addresses": []
+  },
+  {
+    "id": "variabledebttoken",
+    "name": "VariableDebtToken",
+    "repository": "sparklend-v1-core",
+    "layerId": "lending",
+    "securityScore": 9.0,
+    "criticidade": 2.0,
+    "addresses": []
+  },
+  {
+    "id": "almproxy",
+    "name": "ALMProxy",
+    "repository": "spark-alm-controller",
+    "layerId": "alm",
+    "securityScore": 6.1,
+    "criticidade": 4.0,
+    "addresses": [
+      { "network": "mainnet", "address": "0x8A87497488073307E1a17e8A12475a94Afcb413f" }
+    ]
+  },
+  {
+    "id": "mainnetcontroller",
+    "name": "MainnetController",
+    "repository": "spark-alm-controller",
+    "layerId": "alm",
+    "securityScore": 7.2,
+    "criticidade": 3.0,
+    "addresses": [
+      { "network": "mainnet", "address": "0x98e3b6F22c47e7f3e02E7f6De61bCE4b1a9EF1E" }
+    ]
+  },
+  {
+    "id": "foreigncontroller",
+    "name": "ForeignController",
+    "repository": "spark-alm-controller",
+    "layerId": "alm",
+    "securityScore": 6.9,
+    "criticidade": 2.8,
+    "addresses": [
+      { "network": "base", "address": "" },
+      { "network": "arbitrum", "address": "" }
+    ]
+  },
+  {
+    "id": "ratelimits",
+    "name": "RateLimits",
+    "repository": "spark-alm-controller",
+    "layerId": "alm",
+    "securityScore": 6.8,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "otcbuffer",
+    "name": "OTCBuffer",
+    "repository": "spark-alm-controller",
+    "layerId": "alm",
+    "securityScore": 8.2,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "sparklendfreezermom",
+    "name": "SparkLendFreezerMom",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 8.0,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "mainnet", "address": "0x7B9e5E79aC34e2d89b7d756Fc23f56aCBb14b44A" }
+    ]
+  },
+  {
+    "id": "killswitchoracle",
+    "name": "KillSwitchOracle",
+    "repository": "sparklend-kill-switch",
+    "layerId": "security",
+    "securityScore": 9.0,
+    "criticidade": 2.0,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "emergencyspells",
+    "name": "Emergency Spells",
+    "repository": "sparklend-freezer",
+    "layerId": "security",
+    "securityScore": 10.0,
+    "criticidade": 2.0,
+    "addresses": []
+  },
+  {
+    "id": "capautomator",
+    "name": "CapAutomator",
+    "repository": "sparklend-cap-automator",
+    "layerId": "automation",
+    "securityScore": 8.1,
+    "criticidade": 2.2,
+    "addresses": [
+      { "network": "mainnet", "address": "0x2276f52afba7Cf2525fd0a050DF464AC8532d0ef" }
+    ]
+  },
+  {
+    "id": "resolvers",
+    "name": "Resolvers (Keepers)",
+    "repository": "automation",
+    "layerId": "automation",
+    "securityScore": 8.4,
+    "criticidade": 2.0,
+    "addresses": []
+  },
+  {
+    "id": "morphoUpgradableOracle",
+    "name": "MorphoUpgradableOracle",
+    "repository": "sparklend-advanced",
+    "layerId": "oracles",
+    "securityScore": 8.3,
+    "criticidade": 3.0,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "ssrauthOracle",
+    "name": "SSRAuthOracle",
+    "repository": "xchain-ssr-oracle",
+    "layerId": "oracles",
+    "securityScore": 7.3,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "base", "address": "" },
+      { "network": "arbitrum", "address": "" }
+    ]
+  },
+  {
+    "id": "ssrmainnetOracle",
+    "name": "SSRMainnetOracle",
+    "repository": "xchain-ssr-oracle",
+    "layerId": "oracles",
+    "securityScore": 10.0,
+    "criticidade": 1.0,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "xchainhelpersreceivers",
+    "name": "xchain Receivers",
+    "repository": "xchain-helpers",
+    "layerId": "crosschain",
+    "securityScore": 8.1,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "mainnet", "address": "" },
+      { "network": "base", "address": "" },
+      { "network": "arbitrum", "address": "" }
+    ]
+  },
+  {
+    "id": "sparkpsm",
+    "name": "PSM3",
+    "repository": "spark-psm",
+    "layerId": "crosschain",
+    "securityScore": 9.4,
+    "criticidade": 2.0,
+    "addresses": [
+      { "network": "base", "address": "0x1601843c5E9bC251A3272907010AFa41Fa18347E" }
+    ]
+  },
+  {
+    "id": "sparkrewards",
+    "name": "SparkRewards",
+    "repository": "spark-rewards",
+    "layerId": "rewards",
+    "securityScore": 7.9,
+    "criticidade": 2.5,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "dssvest",
+    "name": "DssVest",
+    "repository": "dss-vest",
+    "layerId": "rewards",
+    "securityScore": 7.4,
+    "criticidade": 2.2,
+    "addresses": [
+      { "network": "mainnet", "address": "0x2Ff369f1aB42B610F0A81D46aC1cEdFE0aE48C7" }
+    ]
+  },
+  {
+    "id": "savingsvaultintents",
+    "name": "SavingsVaultIntents",
+    "repository": "spark-savings-intents",
+    "layerId": "rewards",
+    "securityScore": 8.75,
+    "criticidade": 2.0,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "sparkvault",
+    "name": "SparkVault",
+    "repository": "spark-vaults-v2",
+    "layerId": "rewards",
+    "securityScore": 7.8,
+    "criticidade": 2.8,
+    "addresses": [
+      { "network": "mainnet", "address": "" }
+    ]
+  },
+  {
+    "id": "usdcvault",
+    "name": "UsdcVault",
+    "repository": "spark-vaults",
+    "layerId": "rewards",
+    "securityScore": 7.0,
+    "criticidade": 3.2,
+    "addresses": [
+      { "network": "mainnet", "address": "" },
+      { "network": "base", "address": "" }
+    ]
+  }
+]
