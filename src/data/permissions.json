@@ -1,836 +1,871 @@
-[
-  {
-    "id": "default_admin_role",
-    "name": "DEFAULT_ADMIN_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "LOW",
-    "grantedBy": "Holders of DEFAULT_ADMIN_ROLE in each contract (Sky governance via PauseProxy for SparkLend; Spark SubDAO Proxy for ALM and automation contracts)",
-    "contracts": [
-      {
-        "contractId": "aclmanager",
-        "contractName": "ACLManager",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
-            "label": "Sky PauseProxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "mainnetcontroller",
-        "contractName": "MainnetController",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "ratelimits",
-        "contractName": "RateLimits",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "capautomator",
-        "contractName": "CapAutomator",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "sparkrewards",
-        "contractName": "SparkRewards",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "savingsvaultintents",
-        "contractName": "SavingsVaultIntents",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "executor",
-        "contractName": "Executor (Gov Relay)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "pool_admin_role",
-    "name": "POOL_ADMIN_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "LOW",
-    "grantedBy": "Admin of POOL_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder — Sky PauseProxy)",
-    "contracts": [
-      {
-        "contractId": "aclmanager",
-        "contractName": "ACLManager → PoolConfigurator, Pool, AToken, DebtTokens",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "risk_admin_role",
-    "name": "RISK_ADMIN_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "MEDIUM",
-    "grantedBy": "Admin of RISK_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder — Sky PauseProxy)",
-    "contracts": [
-      {
-        "contractId": "aclmanager",
-        "contractName": "ACLManager → PoolConfigurator",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x237e3985dD7E373F2ec878EC1Ac48A228Cf2e7a3",
-            "label": "SparkLendFreezerMom",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM",
-            "note": "Address differs from SparkLendFreezerMom in reference table (0xFA36c12b...) — may be a different deployment"
-          },
-          {
-            "address": "0x4C1341636721b8B687647920B2E9481f3AB1F2eE",
-            "label": "CapAutomator (v1)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM",
-            "note": "Address differs from CapAutomator in reference table (0x2276f52a...) — may be an older deployment"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "emergency_admin_role",
-    "name": "EMERGENCY_ADMIN_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "MEDIUM",
-    "grantedBy": "Admin of EMERGENCY_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder — Sky PauseProxy)",
-    "contracts": [
-      {
-        "contractId": "aclmanager",
-        "contractName": "ACLManager → PoolConfigurator",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          },
-          {
-            "address": "0x237e3985dD7E373F2ec878EC1Ac48A228Cf2e7a3",
-            "label": "SparkLendFreezerMom",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "bridge_role",
-    "name": "BRIDGE_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "LOW",
-    "grantedBy": "Admin of BRIDGE_ROLE in ACLManager",
-    "contracts": [
-      {
-        "contractId": "pool",
-        "contractName": "Pool (mintUnbacked, backUnbacked)",
-        "network": "mainnet",
-        "holders": []
-      }
-    ]
-  },
-  {
-    "id": "flash_borrower_role",
-    "name": "FLASH_BORROWER_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "LOW",
-    "grantedBy": "Admin of FLASH_BORROWER_ROLE in ACLManager",
-    "contracts": [
-      {
-        "contractId": "pool",
-        "contractName": "Pool (flash loan fee exemption)",
-        "network": "mainnet",
-        "holders": []
-      }
-    ]
-  },
-  {
-    "id": "asset_listing_admin_role",
-    "name": "ASSET_LISTING_ADMIN_ROLE",
-    "mechanism": "OZ AccessControl (via ACLManager)",
-    "concentration": "LOW",
-    "grantedBy": "Admin of ASSET_LISTING_ADMIN_ROLE in ACLManager",
-    "contracts": [
-      {
-        "contractId": "poolconfigurator",
-        "contractName": "PoolConfigurator (initReserves)",
-        "network": "mainnet",
-        "holders": []
-      }
-    ]
-  },
-  {
-    "id": "controller",
-    "name": "CONTROLLER",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in ALMProxy and RateLimits (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "almproxy",
-        "contractName": "ALMProxy",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
-            "label": "MainnetController",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "ratelimits",
-        "contractName": "RateLimits",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
-            "label": "MainnetController",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "relayer",
-    "name": "RELAYER",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in each controller contract (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "mainnetcontroller",
-        "contractName": "MainnetController",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
-            "label": "ALM Relayer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "1-of-2",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x8Cc0Cb0cfB6B7e548cfd395B833c05C346534795",
-            "label": "ALM Backstop Relayer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-5",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
-            "label": "ALM Ops Multisig",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          },
-          {
-            "address": "0x797B010E0BABb493b8DEDD6F6ce5cc72778C2BF3",
-            "label": "ALM Ops Multisig 2",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          }
-        ]
-      },
-      {
-        "contractId": "foreigncontroller",
-        "contractName": "ForeignController",
-        "network": "base / arbitrum",
-        "holders": [
-          {
-            "address": "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
-            "label": "ALM Relayer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "1-of-2",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x8Cc0Cb0cfB6B7e548cfd395B833c05C346534795",
-            "label": "ALM Backstop Relayer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-5",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
-            "label": "ALM Ops Multisig",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          },
-          {
-            "address": "0x797B010E0BABb493b8DEDD6F6ce5cc72778C2BF3",
-            "label": "ALM Ops Multisig 2",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          }
-        ]
-      },
-      {
-        "contractId": "savingsvaultintents",
-        "contractName": "SavingsVaultIntents",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
-            "label": "ALM Relayer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "1-of-2",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
-            "label": "ALM Ops Multisig",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "freezer",
-    "name": "FREEZER",
-    "mechanism": "OZ AccessControl",
-    "concentration": "MEDIUM",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in MainnetController / ForeignController (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "mainnetcontroller",
-        "contractName": "MainnetController",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x90D8c80C028B4C09C0d8dcAab9bbB057F0513431",
-            "label": "ALM Freezer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-4",
-            "securityLevel": "LOW"
-          }
-        ]
-      },
-      {
-        "contractId": "foreigncontroller",
-        "contractName": "ForeignController",
-        "network": "base / arbitrum",
-        "holders": [
-          {
-            "address": "0x90D8c80C028B4C09C0d8dcAab9bbB057F0513431",
-            "label": "ALM Freezer Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-4",
-            "securityLevel": "LOW"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "setter_role",
-    "name": "SETTER_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in SparkVault (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "sparkvault",
-        "contractName": "SparkVault (setVsr)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": null,
-            "label": "Automated keeper / bot — on-chain address not enumerable (contract lacks AccessControlEnumerable)",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "taker_role",
-    "name": "TAKER_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in SparkVault (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "sparkvault",
-        "contractName": "SparkVault (take)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
-            "label": "MainnetController",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "update_role",
-    "name": "UPDATE_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in CapAutomator (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "capautomator",
-        "contractName": "CapAutomator (exec)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": null,
-            "label": "Chainlink Automation / keeper — on-chain address not enumerable (contract lacks AccessControlEnumerable)",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "submission_role",
-    "name": "SUBMISSION_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "LOW",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in Executor (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "executor",
-        "contractName": "Executor / Gov Relay (queue)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x9ba25c289e351779E0D481Ba37489317c34A899d",
-            "label": "Arbitrum Gov Relay (L1)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          },
-          {
-            "address": "0x1Ee0AE8A993F2f5abDB51EAF4AC2876202b65c3b",
-            "label": "Base Gov Relay (L1)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          },
-          {
-            "address": "0x09B354CDA89203BB7B3131CC728dFa06ab09Ae2F",
-            "label": "Optimism Gov Relay (L1)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          },
-          {
-            "address": "0xb383070Cf9F4f01C3a2cfD0ef6da4BC057b429b7",
-            "label": "Unichain Gov Relay (L1)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "guardian_role",
-    "name": "GUARDIAN_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "MEDIUM",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in Executor (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "executor",
-        "contractName": "Executor / Gov Relay (cancel)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x6605aa120fe8b656482903E7757BaBF56947E45E",
-            "label": "SPARK_STAR_GUARD",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM",
-            "note": "Not a Gnosis Safe — custom guardian contract"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "merkle_root_role",
-    "name": "MERKLE_ROOT_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in SparkRewards (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "sparkrewards",
-        "contractName": "SparkRewards (setMerkleRoot)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0xF649956f43825d4d7295a50EDdBe1EDC814A3a83",
-            "label": "Spark Rewards Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-3",
-            "securityLevel": "LOW"
-          },
-          {
-            "address": "0x8076807464DaC94Ac8Aa1f7aF31b58F73bD88A27",
-            "label": "SparkLend Rewards Multisig",
-            "type": "Multisig",
-            "safeThreshold": "2-of-3",
-            "securityLevel": "LOW"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "epoch_role",
-    "name": "EPOCH_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in SparkRewards (Spark SubDAO Proxy)",
-    "contracts": [
-      {
-        "contractId": "sparkrewards",
-        "contractName": "SparkRewards (setEpochClosed)",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": null,
-            "label": "Rewards multisig or automated bot — on-chain address not enumerable (contract lacks AccessControlEnumerable)",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "data_provider_role",
-    "name": "DATA_PROVIDER_ROLE",
-    "mechanism": "OZ AccessControl",
-    "concentration": "HIGH",
-    "grantedBy": "DEFAULT_ADMIN_ROLE in SSRAuthOracle (per L2 chain)",
-    "contracts": [
-      {
-        "contractId": "ssrauthOracle",
-        "contractName": "SSRAuthOracle (Base)",
-        "network": "base",
-        "holders": [
-          {
-            "address": "0x65d946e533748A998B1f0E430803e39A6388f7a1",
-            "label": "SSRAuthOracle Base (self-reference / forwarder target)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM"
-          },
-          {
-            "address": "0xB2833392527f41262eB0E3C7b47AFbe030ef188E",
-            "label": "DSR Forwarder (Eth→Base)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      },
-      {
-        "contractId": "ssrauthOracle",
-        "contractName": "SSRAuthOracle (Arbitrum)",
-        "network": "arbitrum",
-        "holders": [
-          {
-            "address": "0xEE2816c1E1eed14d444552654Ed3027abC033A36",
-            "label": "SSRAuthOracle Arbitrum (self-reference / forwarder target)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "MEDIUM"
-          },
-          {
-            "address": "0x1A229AdbAC83A948226783F2A3257B52006247D5",
-            "label": "DSR Forwarder (Eth→Arbitrum)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "owner_pooladdressesprovider",
-    "name": "owner (PoolAddressesProvider)",
-    "mechanism": "Ownable",
-    "concentration": "LOW",
-    "grantedBy": "Current owner via transferOwnership() — controlled by Sky governance",
-    "contracts": [
-      {
-        "contractId": "pooladdressesprovider",
-        "contractName": "PoolAddressesProvider",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
-            "label": "Sky PauseProxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "owner_psm3",
-    "name": "owner (PSM3)",
-    "mechanism": "Ownable",
-    "concentration": "LOW",
-    "grantedBy": "Current owner via transferOwnership() — controlled by Spark governance per chain",
-    "contracts": [
-      {
-        "contractId": "sparkpsm",
-        "contractName": "PSM3 (Base)",
-        "network": "base",
-        "holders": [
-          {
-            "address": null,
-            "label": "Spark governance (L2) — on-chain address requires verification",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      },
-      {
-        "contractId": "sparkpsm",
-        "contractName": "PSM3 (Arbitrum)",
-        "network": "arbitrum",
-        "holders": [
-          {
-            "address": null,
-            "label": "Spark governance (L2) — on-chain address requires verification",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "owner_killswitchoracle",
-    "name": "owner (KillSwitchOracle)",
-    "mechanism": "Ownable",
-    "concentration": "LOW",
-    "grantedBy": "Current owner via transferOwnership() — controlled by Sky/Spark governance",
-    "contracts": [
-      {
-        "contractId": "killswitchoracle",
-        "contractName": "KillSwitchOracle",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
-            "label": "Sky PauseProxy (presumed — same as PoolAddressesProvider owner)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "wards_sparklendconduit",
-    "name": "wards (SparkLendConduit)",
-    "mechanism": "Ward (MakerDAO rely/deny)",
-    "concentration": "LOW",
-    "grantedBy": "Existing wards via rely() — controlled by Sky governance spells",
-    "contracts": [
-      {
-        "contractId": "sparklendconduit",
-        "contractName": "SparkLendConduit",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
-            "label": "Spark SubDAO Proxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "wards_usdcvault",
-    "name": "wards (UsdcVault)",
-    "mechanism": "Ward (MakerDAO rely/deny)",
-    "concentration": "MEDIUM",
-    "grantedBy": "Existing wards via rely() — governance spell or vault administrator",
-    "contracts": [
-      {
-        "contractId": "usdcvault",
-        "contractName": "UsdcVault",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": null,
-            "label": "Governance spell or vault admin — on-chain address requires verification",
-            "type": null,
-            "safeThreshold": null,
-            "securityLevel": null
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "wards_dssvest",
-    "name": "wards (DssVest)",
-    "mechanism": "Ward (MakerDAO rely/deny)",
-    "concentration": "LOW",
-    "grantedBy": "Existing wards via rely() — controlled by Sky governance (PauseProxy via spells)",
-    "contracts": [
-      {
-        "contractId": "dssvest",
-        "contractName": "DssVest",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
-            "label": "Sky PauseProxy",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "wards_freezermom",
-    "name": "wards + authority (SparkLendFreezerMom)",
-    "mechanism": "Ward (MakerDAO rely/deny) + DSAuthority",
-    "concentration": "MEDIUM",
-    "grantedBy": "Existing wards via rely(); authority set by owner; emergency spells added as wards via governance",
-    "contracts": [
-      {
-        "contractId": "sparklendfreezermom",
-        "contractName": "SparkLendFreezerMom",
-        "network": "mainnet",
-        "holders": [
-          {
-            "address": "0x44efFc473e81632B12486866AA1678edbb7BEeC3",
-            "label": "Spark Emergency Multisig",
-            "type": "Multisig",
-            "safeThreshold": "3-of-5",
-            "securityLevel": "MEDIUM"
-          },
-          {
-            "address": "0x0a3f6849f78076aefaDf113F5BED87720274dDC0",
-            "label": "Sky Chief (DSAuthority)",
-            "type": "Contract",
-            "safeThreshold": null,
-            "securityLevel": "HIGH"
-          }
-        ]
-      }
-    ]
-  }
+﻿[
+    {
+        "id":  "default_admin_role",
+        "name":  "DEFAULT_ADMIN_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "LOW",
+        "grantedBy":  "Holders of DEFAULT_ADMIN_ROLE in each contract (Sky governance via PauseProxy for SparkLend; Spark SubDAO Proxy for ALM and automation contracts)",
+        "contracts":  [
+                          {
+                              "contractId":  "aclmanager",
+                              "contractName":  "ACLManager",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
+                                                  "label":  "Sky PauseProxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "MKR token holders → DSChief → Executive Spell"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "mainnetcontroller",
+                              "contractName":  "MainnetController",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "ratelimits",
+                              "contractName":  "RateLimits",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "capautomator",
+                              "contractName":  "CapAutomator",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "sparkrewards",
+                              "contractName":  "SparkRewards",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "savingsvaultintents",
+                              "contractName":  "SavingsVaultIntents",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "executor",
+                              "contractName":  "Executor (Gov Relay)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "pool_admin_role",
+        "name":  "POOL_ADMIN_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "LOW",
+        "grantedBy":  "Admin of POOL_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder â€” Sky PauseProxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "aclmanager",
+                              "contractName":  "ACLManager â†’ PoolConfigurator, Pool, AToken, DebtTokens",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "risk_admin_role",
+        "name":  "RISK_ADMIN_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "Admin of RISK_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder â€” Sky PauseProxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "aclmanager",
+                              "contractName":  "ACLManager â†’ PoolConfigurator",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x237e3985dD7E373F2ec878EC1Ac48A228Cf2e7a3",
+                                                  "label":  "SparkLendFreezerMom",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "note":  "Address differs from SparkLendFreezerMom in reference table (0xFA36c12b...) â€” may be a different deployment",
+                                                  "controlledBy":  "Wards: Spark Emergency Multisig (3-of-5) + Sky Chief via DSAuthority"
+                                              },
+                                              {
+                                                  "address":  "0x4C1341636721b8B687647920B2E9481f3AB1F2eE",
+                                                  "label":  "CapAutomator (v1)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "note":  "Address differs from CapAutomator in reference table (0x2276f52a...) â€” may be an older deployment",
+                                                  "controlledBy":  "Spark SubDAO Proxy (DEFAULT_ADMIN_ROLE); runs autonomously on-chain"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "emergency_admin_role",
+        "name":  "EMERGENCY_ADMIN_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "Admin of EMERGENCY_ADMIN_ROLE in ACLManager (DEFAULT_ADMIN_ROLE holder â€” Sky PauseProxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "aclmanager",
+                              "contractName":  "ACLManager â†’ PoolConfigurator",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              },
+                                              {
+                                                  "address":  "0x237e3985dD7E373F2ec878EC1Ac48A228Cf2e7a3",
+                                                  "label":  "SparkLendFreezerMom",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "controlledBy":  "Wards: Spark Emergency Multisig (3-of-5) + Sky Chief via DSAuthority"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "bridge_role",
+        "name":  "BRIDGE_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "LOW",
+        "grantedBy":  "Admin of BRIDGE_ROLE in ACLManager",
+        "contracts":  [
+                          {
+                              "contractId":  "pool",
+                              "contractName":  "Pool (mintUnbacked, backUnbacked)",
+                              "network":  "mainnet",
+                              "holders":  [
+
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "flash_borrower_role",
+        "name":  "FLASH_BORROWER_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "LOW",
+        "grantedBy":  "Admin of FLASH_BORROWER_ROLE in ACLManager",
+        "contracts":  [
+                          {
+                              "contractId":  "pool",
+                              "contractName":  "Pool (flash loan fee exemption)",
+                              "network":  "mainnet",
+                              "holders":  [
+
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "asset_listing_admin_role",
+        "name":  "ASSET_LISTING_ADMIN_ROLE",
+        "mechanism":  "OZ AccessControl (via ACLManager)",
+        "concentration":  "LOW",
+        "grantedBy":  "Admin of ASSET_LISTING_ADMIN_ROLE in ACLManager",
+        "contracts":  [
+                          {
+                              "contractId":  "poolconfigurator",
+                              "contractName":  "PoolConfigurator (initReserves)",
+                              "network":  "mainnet",
+                              "holders":  [
+
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "controller",
+        "name":  "CONTROLLER",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in ALMProxy and RateLimits (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "almproxy",
+                              "contractName":  "ALMProxy",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
+                                                  "label":  "MainnetController",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Day-to-day: ALM Relayer / Ops multisigs (RELAYER role); config: Spark SubDAO Proxy"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "ratelimits",
+                              "contractName":  "RateLimits",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
+                                                  "label":  "MainnetController",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Day-to-day: ALM Relayer / Ops multisigs (RELAYER role); config: Spark SubDAO Proxy"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "relayer",
+        "name":  "RELAYER",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in each controller contract (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "mainnetcontroller",
+                              "contractName":  "MainnetController",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
+                                                  "label":  "ALM Relayer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "1-of-2",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x8Cc0Cb0cfB6B7e548cfd395B833c05C346534795",
+                                                  "label":  "ALM Backstop Relayer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-5",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
+                                                  "label":  "ALM Ops Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              },
+                                              {
+                                                  "address":  "0x797B010E0BABb493b8DEDD6F6ce5cc72778C2BF3",
+                                                  "label":  "ALM Ops Multisig 2",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "foreigncontroller",
+                              "contractName":  "ForeignController",
+                              "network":  "base / arbitrum",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
+                                                  "label":  "ALM Relayer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "1-of-2",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x8Cc0Cb0cfB6B7e548cfd395B833c05C346534795",
+                                                  "label":  "ALM Backstop Relayer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-5",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
+                                                  "label":  "ALM Ops Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              },
+                                              {
+                                                  "address":  "0x797B010E0BABb493b8DEDD6F6ce5cc72778C2BF3",
+                                                  "label":  "ALM Ops Multisig 2",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "savingsvaultintents",
+                              "contractName":  "SavingsVaultIntents",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x8a25A24EDE9482C4Fc0738F99611BE58F1c839AB",
+                                                  "label":  "ALM Relayer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "1-of-2",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x2E1b01adABB8D4981863394bEa23a1263CBaeDfC",
+                                                  "label":  "ALM Ops Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "freezer",
+        "name":  "FREEZER",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in MainnetController / ForeignController (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "mainnetcontroller",
+                              "contractName":  "MainnetController",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x90D8c80C028B4C09C0d8dcAab9bbB057F0513431",
+                                                  "label":  "ALM Freezer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-4",
+                                                  "securityLevel":  "LOW"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "foreigncontroller",
+                              "contractName":  "ForeignController",
+                              "network":  "base / arbitrum",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x90D8c80C028B4C09C0d8dcAab9bbB057F0513431",
+                                                  "label":  "ALM Freezer Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-4",
+                                                  "securityLevel":  "LOW"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "setter_role",
+        "name":  "SETTER_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in SparkVault (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "sparkvault",
+                              "contractName":  "SparkVault (setVsr)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Automated keeper / bot â€” on-chain address not enumerable (contract lacks AccessControlEnumerable)",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "taker_role",
+        "name":  "TAKER_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in SparkVault (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "sparkvault",
+                              "contractName":  "SparkVault (take)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x5c46Fc65855c0C7465a1EA85EEA0B24B601502D3",
+                                                  "label":  "MainnetController",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Day-to-day: ALM Relayer / Ops multisigs (RELAYER role); config: Spark SubDAO Proxy"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "update_role",
+        "name":  "UPDATE_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in CapAutomator (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "capautomator",
+                              "contractName":  "CapAutomator (exec)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Chainlink Automation / keeper â€” on-chain address not enumerable (contract lacks AccessControlEnumerable)",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "submission_role",
+        "name":  "SUBMISSION_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "LOW",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in Executor (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "executor",
+                              "contractName":  "Executor / Gov Relay (queue)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x9ba25c289e351779E0D481Ba37489317c34A899d",
+                                                  "label":  "Arbitrum Gov Relay (L1)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell → Arbitrum cross-chain bridge → Executor L2"
+                                              },
+                                              {
+                                                  "address":  "0x1Ee0AE8A993F2f5abDB51EAF4AC2876202b65c3b",
+                                                  "label":  "Base Gov Relay (L1)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell → Base cross-chain bridge → Executor L2"
+                                              },
+                                              {
+                                                  "address":  "0x09B354CDA89203BB7B3131CC728dFa06ab09Ae2F",
+                                                  "label":  "Optimism Gov Relay (L1)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell → Optimism cross-chain bridge → Executor L2"
+                                              },
+                                              {
+                                                  "address":  "0xb383070Cf9F4f01C3a2cfD0ef6da4BC057b429b7",
+                                                  "label":  "Unichain Gov Relay (L1)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell → Unichain cross-chain bridge → Executor L2"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "guardian_role",
+        "name":  "GUARDIAN_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in Executor (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "executor",
+                              "contractName":  "Executor / Gov Relay (cancel)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x6605aa120fe8b656482903E7757BaBF56947E45E",
+                                                  "label":  "SPARK_STAR_GUARD",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "note":  "Not a Gnosis Safe â€” custom guardian contract",
+                                                  "controlledBy":  "Spark governance (custom guardian — can cancel queued proposals)"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "merkle_root_role",
+        "name":  "MERKLE_ROOT_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in SparkRewards (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "sparkrewards",
+                              "contractName":  "SparkRewards (setMerkleRoot)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xF649956f43825d4d7295a50EDdBe1EDC814A3a83",
+                                                  "label":  "Spark Rewards Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-3",
+                                                  "securityLevel":  "LOW"
+                                              },
+                                              {
+                                                  "address":  "0x8076807464DaC94Ac8Aa1f7aF31b58F73bD88A27",
+                                                  "label":  "SparkLend Rewards Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "2-of-3",
+                                                  "securityLevel":  "LOW"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "epoch_role",
+        "name":  "EPOCH_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in SparkRewards (Spark SubDAO Proxy)",
+        "contracts":  [
+                          {
+                              "contractId":  "sparkrewards",
+                              "contractName":  "SparkRewards (setEpochClosed)",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Rewards multisig or automated bot â€” on-chain address not enumerable (contract lacks AccessControlEnumerable)",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "data_provider_role",
+        "name":  "DATA_PROVIDER_ROLE",
+        "mechanism":  "OZ AccessControl",
+        "concentration":  "HIGH",
+        "grantedBy":  "DEFAULT_ADMIN_ROLE in SSRAuthOracle (per L2 chain)",
+        "contracts":  [
+                          {
+                              "contractId":  "ssrauthOracle",
+                              "contractName":  "SSRAuthOracle (Base)",
+                              "network":  "base",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x65d946e533748A998B1f0E430803e39A6388f7a1",
+                                                  "label":  "SSRAuthOracle Base (self-reference / forwarder target)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "controlledBy":  "Data pushed by DSR Forwarder (Eth→Base); forwarder triggered by Sky governance"
+                                              },
+                                              {
+                                                  "address":  "0xB2833392527f41262eB0E3C7b47AFbe030ef188E",
+                                                  "label":  "DSR Forwarder (Ethâ†’Base)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell calls forwardDSR() on Ethereum mainnet"
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "ssrauthOracle",
+                              "contractName":  "SSRAuthOracle (Arbitrum)",
+                              "network":  "arbitrum",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xEE2816c1E1eed14d444552654Ed3027abC033A36",
+                                                  "label":  "SSRAuthOracle Arbitrum (self-reference / forwarder target)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "MEDIUM",
+                                                  "controlledBy":  "Data pushed by DSR Forwarder (Eth→Arbitrum); forwarder triggered by Sky governance"
+                                              },
+                                              {
+                                                  "address":  "0x1A229AdbAC83A948226783F2A3257B52006247D5",
+                                                  "label":  "DSR Forwarder (Ethâ†’Arbitrum)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky governance spell calls forwardDSR() on Ethereum mainnet"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "owner_pooladdressesprovider",
+        "name":  "owner (PoolAddressesProvider)",
+        "mechanism":  "Ownable",
+        "concentration":  "LOW",
+        "grantedBy":  "Current owner via transferOwnership() â€” controlled by Sky governance",
+        "contracts":  [
+                          {
+                              "contractId":  "pooladdressesprovider",
+                              "contractName":  "PoolAddressesProvider",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
+                                                  "label":  "Sky PauseProxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "MKR token holders → DSChief → Executive Spell"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "owner_psm3",
+        "name":  "owner (PSM3)",
+        "mechanism":  "Ownable",
+        "concentration":  "LOW",
+        "grantedBy":  "Current owner via transferOwnership() â€” controlled by Spark governance per chain",
+        "contracts":  [
+                          {
+                              "contractId":  "sparkpsm",
+                              "contractName":  "PSM3 (Base)",
+                              "network":  "base",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Spark governance (L2) â€” on-chain address requires verification",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          },
+                          {
+                              "contractId":  "sparkpsm",
+                              "contractName":  "PSM3 (Arbitrum)",
+                              "network":  "arbitrum",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Spark governance (L2) â€” on-chain address requires verification",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "owner_killswitchoracle",
+        "name":  "owner (KillSwitchOracle)",
+        "mechanism":  "Ownable",
+        "concentration":  "LOW",
+        "grantedBy":  "Current owner via transferOwnership() â€” controlled by Sky/Spark governance",
+        "contracts":  [
+                          {
+                              "contractId":  "killswitchoracle",
+                              "contractName":  "KillSwitchOracle",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
+                                                  "label":  "Sky PauseProxy (presumed â€” same as PoolAddressesProvider owner)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "MKR token holders → DSChief → Executive Spell"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "wards_sparklendconduit",
+        "name":  "wards (SparkLendConduit)",
+        "mechanism":  "Ward (MakerDAO rely/deny)",
+        "concentration":  "LOW",
+        "grantedBy":  "Existing wards via rely() â€” controlled by Sky governance spells",
+        "contracts":  [
+                          {
+                              "contractId":  "sparklendconduit",
+                              "contractName":  "SparkLendConduit",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x3300f198988e4C9C63F75dF86De36421f06af8c4",
+                                                  "label":  "Spark SubDAO Proxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "Sky/Spark governance → SubDAO spell process"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "wards_usdcvault",
+        "name":  "wards (UsdcVault)",
+        "mechanism":  "Ward (MakerDAO rely/deny)",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "Existing wards via rely() â€” governance spell or vault administrator",
+        "contracts":  [
+                          {
+                              "contractId":  "usdcvault",
+                              "contractName":  "UsdcVault",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  null,
+                                                  "label":  "Governance spell or vault admin â€” on-chain address requires verification",
+                                                  "type":  null,
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  null
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "wards_dssvest",
+        "name":  "wards (DssVest)",
+        "mechanism":  "Ward (MakerDAO rely/deny)",
+        "concentration":  "LOW",
+        "grantedBy":  "Existing wards via rely() â€” controlled by Sky governance (PauseProxy via spells)",
+        "contracts":  [
+                          {
+                              "contractId":  "dssvest",
+                              "contractName":  "DssVest",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB",
+                                                  "label":  "Sky PauseProxy",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "MKR token holders → DSChief → Executive Spell"
+                                              }
+                                          ]
+                          }
+                      ]
+    },
+    {
+        "id":  "wards_freezermom",
+        "name":  "wards + authority (SparkLendFreezerMom)",
+        "mechanism":  "Ward (MakerDAO rely/deny) + DSAuthority",
+        "concentration":  "MEDIUM",
+        "grantedBy":  "Existing wards via rely(); authority set by owner; emergency spells added as wards via governance",
+        "contracts":  [
+                          {
+                              "contractId":  "sparklendfreezermom",
+                              "contractName":  "SparkLendFreezerMom",
+                              "network":  "mainnet",
+                              "holders":  [
+                                              {
+                                                  "address":  "0x44efFc473e81632B12486866AA1678edbb7BEeC3",
+                                                  "label":  "Spark Emergency Multisig",
+                                                  "type":  "Multisig",
+                                                  "safeThreshold":  "3-of-5",
+                                                  "securityLevel":  "MEDIUM"
+                                              },
+                                              {
+                                                  "address":  "0x0a3f6849f78076aefaDf113F5BED87720274dDC0",
+                                                  "label":  "Sky Chief (DSAuthority)",
+                                                  "type":  "Contract",
+                                                  "safeThreshold":  null,
+                                                  "securityLevel":  "HIGH",
+                                                  "controlledBy":  "MKR token holders → DSChief; active hat (winning spell) can call FreezerMom"
+                                              }
+                                          ]
+                          }
+                      ]
+    }
 ]

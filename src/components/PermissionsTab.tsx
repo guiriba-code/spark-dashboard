@@ -84,6 +84,11 @@ function HolderRow({ holder, network }: { holder: RoleHolder; network: string })
     <tr style={{ borderTop: '1px solid #1a1a3a' }}>
       <td style={{ padding: '4px 8px', fontFamily: 'Courier New, monospace', fontSize: 10, color: '#ffffff' }}>
         {holder.label}
+        {holder.controlledBy && (
+          <span style={{ display: 'block', fontSize: 8, color: '#00ccff', marginTop: 3, letterSpacing: 0.3 }}>
+            ▲ {holder.controlledBy}
+          </span>
+        )}
         {holder.note && (
           <span style={{ display: 'block', fontSize: 8, color: CLR_LABEL, marginTop: 2 }}>⚠ {holder.note}</span>
         )}
@@ -488,6 +493,9 @@ export default function PermissionsTab() {
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#00ff41' }}>HIGH</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#ffcc00' }}>MEDIUM</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#ff4444' }}>LOW</span>
+        <span style={{ color: '#2a2a5a' }}>|</span>
+        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#00ccff' }}>▲ CONTROLLED BY</span>
+        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_MUTED }}>= who ultimately controls a contract holder</span>
       </div>
 
       {/* Content */}

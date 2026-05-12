@@ -55,6 +55,7 @@ export interface RoleHolder {
   type: 'EOA' | 'Multisig' | 'Contract' | null
   safeThreshold: string | null
   securityLevel: 'LOW' | 'MEDIUM' | 'HIGH' | null
+  controlledBy?: string   // who ultimately controls this address and can use the role
   note?: string
 }
 
