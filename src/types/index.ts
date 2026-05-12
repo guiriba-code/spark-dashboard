@@ -49,6 +49,31 @@ export interface Top30Entry {
   worstCase?: string
 }
 
+export interface RoleHolder {
+  address: string | null
+  label: string
+  type: 'EOA' | 'Multisig' | 'Contract' | null
+  safeThreshold: string | null
+  securityLevel: 'LOW' | 'MEDIUM' | 'HIGH' | null
+  note?: string
+}
+
+export interface RoleContract {
+  contractId: string
+  contractName: string
+  network: string
+  holders: RoleHolder[]
+}
+
+export interface Permission {
+  id: string
+  name: string
+  mechanism: string
+  concentration: 'LOW' | 'MEDIUM' | 'HIGH'
+  grantedBy: string
+  contracts: RoleContract[]
+}
+
 export type ScoreColor = 'red' | 'yellow' | 'green'
 
 export function getScoreColor(score: number): ScoreColor {

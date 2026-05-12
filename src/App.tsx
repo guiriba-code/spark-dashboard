@@ -10,19 +10,21 @@ import { OverviewTab  } from './components/OverviewTab'
 import { InsecureTab  } from './components/InsecureTab'
 import { Top30Tab     } from './components/Top30Tab'
 import { SummaryTab   } from './components/SummaryTab'
+import PermissionsTab   from './components/PermissionsTab'
 
 const typedLayers    = layers    as Layer[]
 const typedContracts = contracts as Contract[]
 const typedFunctions = functions as SparkFunction[]
 const typedTop30     = top30     as Top30Entry[]
 
-type Tab = 'overview' | 'summary' | 'insecure' | 'top30'
+type Tab = 'overview' | 'summary' | 'insecure' | 'top30' | 'permissions'
 
 const TABS: { id: Tab; label: string; shortcut: string }[] = [
-  { id: 'overview', label: 'NODE MAP',             shortcut: 'F1' },
-  { id: 'summary',  label: 'SUMMARY BY LAYER',     shortcut: 'F2' },
-  { id: 'insecure', label: 'HIGHEST RISK',           shortcut: 'F3' },
-  { id: 'top30',    label: 'TOP 30 BY RELEVANCE',   shortcut: 'F4' },
+  { id: 'overview',     label: 'NODE MAP',             shortcut: 'F1' },
+  { id: 'summary',      label: 'SUMMARY BY LAYER',     shortcut: 'F2' },
+  { id: 'insecure',     label: 'HIGHEST RISK',         shortcut: 'F3' },
+  { id: 'top30',        label: 'TOP 30 BY RELEVANCE',  shortcut: 'F4' },
+  { id: 'permissions',  label: 'PERMISSIONS',          shortcut: 'F5' },
 ]
 
 export default function App() {
@@ -183,6 +185,9 @@ export default function App() {
             functions={typedFunctions}
             contracts={typedContracts}
           />
+        )}
+        {activeTab === 'permissions' && (
+          <PermissionsTab />
         )}
       </main>
 
