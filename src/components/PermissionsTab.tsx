@@ -77,7 +77,7 @@ function HolderRow({ holder, network }: { holder: RoleHolder; network: string })
   const url = holder.address ? etherscanUrl(holder.address, network) : ''
   return (
     <tr style={{ borderTop: '1px solid #1a1a3a' }}>
-      <td style={{ padding: '4px 8px', fontFamily: 'Courier New, monospace', fontSize: 10, color: '#c0c0f0' }}>
+      <td style={{ padding: '4px 8px', fontFamily: 'Courier New, monospace', fontSize: 10, color: '#ffffff' }}>
         {holder.label}
         {holder.note && (
           <span style={{ display: 'block', fontSize: 8, color: '#3a3a6a', marginTop: 2 }}>⚠ {holder.note}</span>
