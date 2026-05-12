@@ -4,7 +4,12 @@ import permissionsData from '../data/permissions.json'
 
 const permissions = permissionsData as Permission[]
 
-// ── Colour helpers ──────────────────────────────────────────────────────────
+// ── Colour palette ───────────────────────────────────────────────────────────
+// Muted secondary text (labels, sub-headers) — was #3a3a6a / #4a4a8a / #2a2a4a
+const CLR_LABEL   = '#8888b8'   // readable on dark bg
+const CLR_MUTED   = '#6868a0'   // slightly darker, for minor metadata
+const CLR_FOOTER  = '#6060a0'   // footer text
+
 const CONC_COLOR: Record<string, { bg: string; text: string; border: string }> = {
   LOW:    { bg: '#001a00', text: '#00ff41', border: '#00ff41' },
   MEDIUM: { bg: '#1a1400', text: '#ffcc00', border: '#ffcc00' },
@@ -49,7 +54,7 @@ function ConcentrationBadge({ level }: { level: string }) {
 }
 
 function SecurityBadge({ level }: { level: string | null }) {
-  if (!level) return <span style={{ color: '#3a3a6a', fontFamily: 'Courier New, monospace', fontSize: 9 }}>UNKNOWN</span>
+  if (!level) return <span style={{ color: CLR_LABEL, fontFamily: 'Courier New, monospace', fontSize: 9 }}>UNKNOWN</span>
   const c = SEC_COLOR[level] ?? SEC_COLOR.LOW
   return (
     <span style={{
@@ -61,7 +66,7 @@ function SecurityBadge({ level }: { level: string | null }) {
 }
 
 function TypeBadge({ type, threshold }: { type: string | null; threshold: string | null }) {
-  if (!type) return <span style={{ color: '#3a3a6a', fontFamily: 'Courier New, monospace', fontSize: 9 }}>TBD</span>
+  if (!type) return <span style={{ color: CLR_LABEL, fontFamily: 'Courier New, monospace', fontSize: 9 }}>TBD</span>
   const c = TYPE_COLOR[type] ?? TYPE_COLOR.Contract
   const label = type === 'Multisig' && threshold ? `MULTISIG ${threshold}` : type.toUpperCase()
   return (
@@ -80,7 +85,7 @@ function HolderRow({ holder, network }: { holder: RoleHolder; network: string })
       <td style={{ padding: '4px 8px', fontFamily: 'Courier New, monospace', fontSize: 10, color: '#ffffff' }}>
         {holder.label}
         {holder.note && (
-          <span style={{ display: 'block', fontSize: 8, color: '#3a3a6a', marginTop: 2 }}>⚠ {holder.note}</span>
+          <span style={{ display: 'block', fontSize: 8, color: CLR_LABEL, marginTop: 2 }}>⚠ {holder.note}</span>
         )}
       </td>
       <td style={{ padding: '4px 8px' }}>
@@ -95,7 +100,7 @@ function HolderRow({ holder, network }: { holder: RoleHolder; network: string })
             {truncateAddr(holder.address)} ↗
           </a>
         ) : (
-          <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: '#3a3a6a' }}>not enumerable</span>
+          <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: CLR_LABEL }}>not enumerable</span>
         )}
       </td>
       <td style={{ padding: '4px 8px' }}>
@@ -132,19 +137,19 @@ function RoleCard({ permission }: { permission: Permission }) {
             : 'transparent',
         }}
       >
-        <span style={{ color: '#3a3a6a', fontSize: 12, userSelect: 'none' }}>{open ? '▼' : '▶'}</span>
+        <span style={{ color: '#a0a0c0', fontSize: 12, userSelect: 'none' }}>{open ? '▼' : '▶'}</span>
         <span style={{
           fontFamily: "'Press Start 2P', monospace", fontSize: 9,
           color: '#00ccff', flex: 1, letterSpacing: 0.5,
         }}>{permission.name}</span>
         <ConcentrationBadge level={permission.concentration} />
         <span style={{
-          fontFamily: 'Courier New, monospace', fontSize: 8, color: '#808080',
+          fontFamily: 'Courier New, monospace', fontSize: 8, color: '#b0b0d0',
           marginLeft: 6,
         }}>{permission.mechanism}</span>
         <span style={{
-          fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a',
-          background: '#0f0f1e', padding: '1px 5px', border: '1px solid #1a1a3a',
+          fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL,
+          background: '#0f0f1e', padding: '1px 5px', border: '1px solid #2a2a4a',
           marginLeft: 4,
         }}>
           {totalHolders} holder{totalHolders !== 1 ? 's' : ''}
@@ -158,9 +163,9 @@ function RoleCard({ permission }: { permission: Permission }) {
           <div style={{
             padding: '6px 14px', background: '#06060f',
             fontFamily: 'Courier New, monospace', fontSize: 9,
-            color: '#808080', borderBottom: '1px solid #1a1a3a',
+            color: '#c0c0e0', borderBottom: '1px solid #1a1a3a',
           }}>
-            <span style={{ color: '#3a3a6a' }}>GRANTED BY: </span>
+            <span style={{ color: CLR_LABEL }}>GRANTED BY: </span>
             {permission.grantedBy}
           </div>
 
@@ -172,21 +177,21 @@ function RoleCard({ permission }: { permission: Permission }) {
                 padding: '5px 14px', background: '#080816',
                 display: 'flex', alignItems: 'center', gap: 8,
               }}>
-                <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: '#4a4a8a' }}>CONTRACT:</span>
-                <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: '#c0c0f0', fontWeight: 700 }}>
+                <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: CLR_LABEL }}>CONTRACT:</span>
+                <span style={{ fontFamily: 'Courier New, monospace', fontSize: 9, color: '#e0e0ff', fontWeight: 700 }}>
                   {rc.contractName}
                 </span>
                 <span style={{
                   fontFamily: 'Courier New, monospace', fontSize: 8,
-                  color: '#3a3a5a', background: '#0f0f1e',
-                  padding: '1px 4px', border: '1px solid #1a1a3a',
+                  color: CLR_LABEL, background: '#0f0f1e',
+                  padding: '1px 4px', border: '1px solid #2a2a4a',
                 }}>
                   {rc.network}
                 </span>
               </div>
 
               {rc.holders.length === 0 ? (
-                <div style={{ padding: '6px 14px', fontFamily: 'Courier New, monospace', fontSize: 9, color: '#3a3a6a' }}>
+                <div style={{ padding: '6px 14px', fontFamily: 'Courier New, monospace', fontSize: 9, color: CLR_LABEL }}>
                   No current holders — role inactive
                 </div>
               ) : (
@@ -197,7 +202,7 @@ function RoleCard({ permission }: { permission: Permission }) {
                         <th key={h} style={{
                           padding: '3px 8px', textAlign: 'left',
                           fontFamily: 'Courier New, monospace', fontSize: 8,
-                          color: '#3a3a6a', letterSpacing: 1, fontWeight: 400,
+                          color: CLR_LABEL, letterSpacing: 1, fontWeight: 400,
                         }}>{h}</th>
                       ))}
                     </tr>
@@ -229,7 +234,6 @@ function ContractPermissionsView() {
     })
   }
 
-  // Build contractId → { contractName, network, roles[] } map
   const byContract = useMemo(() => {
     const map = new Map<string, { contractName: string; network: string; key: string; roles: { permission: Permission; holders: RoleHolder[] }[] }>()
     for (const perm of permissions) {
@@ -264,19 +268,19 @@ function ContractPermissionsView() {
                 background: isOpen ? 'linear-gradient(90deg,#0a0a3a 0%,#0f0f2e 100%)' : 'transparent',
               }}
             >
-              <span style={{ color: '#3a3a6a', fontSize: 12 }}>{isOpen ? '▼' : '▶'}</span>
+              <span style={{ color: '#a0a0c0', fontSize: 12 }}>{isOpen ? '▼' : '▶'}</span>
               <span style={{
-                fontFamily: 'Courier New, monospace', fontSize: 10, color: '#c0c0f0',
+                fontFamily: 'Courier New, monospace', fontSize: 10, color: '#ffffff',
                 fontWeight: 700, flex: 1,
               }}>{contractName}</span>
               <span style={{
                 fontFamily: 'Courier New, monospace', fontSize: 8,
-                color: '#3a3a5a', background: '#0f0f1e',
-                padding: '1px 4px', border: '1px solid #1a1a3a',
+                color: CLR_LABEL, background: '#0f0f1e',
+                padding: '1px 4px', border: '1px solid #2a2a4a',
               }}>{network}</span>
               <span style={{
-                fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a',
-                background: '#0f0f1e', padding: '1px 5px', border: '1px solid #1a1a3a',
+                fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL,
+                background: '#0f0f1e', padding: '1px 5px', border: '1px solid #2a2a4a',
                 marginLeft: 4,
               }}>{roles.length} role{roles.length !== 1 ? 's' : ''} · {totalHolders} holder{totalHolders !== 1 ? 's' : ''}</span>
             </div>
@@ -294,12 +298,12 @@ function ContractPermissionsView() {
                         color: '#00ccff',
                       }}>{permission.name}</span>
                       <ConcentrationBadge level={permission.concentration} />
-                      <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a', marginLeft: 'auto' }}>
+                      <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL, marginLeft: 'auto' }}>
                         {permission.mechanism}
                       </span>
                     </div>
                     {holders.length === 0 ? (
-                      <div style={{ padding: '6px 14px', fontFamily: 'Courier New, monospace', fontSize: 9, color: '#3a3a6a' }}>
+                      <div style={{ padding: '6px 14px', fontFamily: 'Courier New, monospace', fontSize: 9, color: CLR_LABEL }}>
                         No current holders — role inactive
                       </div>
                     ) : (
@@ -310,7 +314,7 @@ function ContractPermissionsView() {
                               <th key={h} style={{
                                 padding: '3px 8px', textAlign: 'left',
                                 fontFamily: 'Courier New, monospace', fontSize: 8,
-                                color: '#3a3a6a', letterSpacing: 1, fontWeight: 400,
+                                color: CLR_LABEL, letterSpacing: 1, fontWeight: 400,
                               }}>{h}</th>
                             ))}
                           </tr>
@@ -354,7 +358,6 @@ export default function PermissionsTab() {
     )
   }, [search])
 
-  // Summary stats
   const totalHolders = useMemo(() => {
     const seen = new Set<string>()
     for (const p of permissions) for (const c of p.contracts) for (const h of c.holders) if (h.address) seen.add(h.address)
@@ -393,10 +396,10 @@ export default function PermissionsTab() {
       {/* Summary strip */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8, marginBottom: 14 }}>
         {[
-          { label: 'ROLES MAPPED', value: permissions.length, color: 'green' as const, sub: 'across all contracts' },
-          { label: 'UNIQUE HOLDERS', value: totalHolders, color: 'green' as const, sub: 'distinct addresses' },
-          { label: 'LOW SECURITY', value: lowSecCount, color: lowSecCount > 0 ? 'red' as const : 'green' as const, sub: 'holders score LOW' },
-          { label: 'MECHANISMS', value: 3, color: 'yellow' as const, sub: 'OZ / Ownable / Ward' },
+          { label: 'ROLES MAPPED',   value: permissions.length, color: 'green'  as const, sub: 'across all contracts' },
+          { label: 'UNIQUE HOLDERS', value: totalHolders,       color: 'green'  as const, sub: 'distinct addresses' },
+          { label: 'LOW SECURITY',   value: lowSecCount,        color: lowSecCount > 0 ? 'red' as const : 'green' as const, sub: 'holders score LOW' },
+          { label: 'MECHANISMS',     value: 3,                  color: 'yellow' as const, sub: 'OZ / Ownable / Ward' },
         ].map(stat => (
           <div key={stat.label} style={{
             background: '#0f0f1e',
@@ -406,13 +409,13 @@ export default function PermissionsTab() {
           }}>
             <div style={{
               fontFamily: 'Courier New, monospace', fontSize: 8,
-              color: '#3a3a6a', letterSpacing: 1, marginBottom: 4,
+              color: CLR_LABEL, letterSpacing: 1, marginBottom: 4,
             }}>{stat.label}</div>
             <div style={{
               fontFamily: "'Press Start 2P', monospace", fontSize: 16,
               color: stat.color === 'red' ? '#ff4444' : stat.color === 'yellow' ? '#ffcc00' : '#00ff41',
             }}>{stat.value}</div>
-            <div style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a', marginTop: 4 }}>
+            <div style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_MUTED, marginTop: 4 }}>
               {stat.sub}
             </div>
           </div>
@@ -421,7 +424,6 @@ export default function PermissionsTab() {
 
       {/* Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-        {/* View toggle */}
         {(['role', 'contract'] as const).map(v => (
           <button
             key={v}
@@ -430,7 +432,7 @@ export default function PermissionsTab() {
               fontFamily: 'Courier New, monospace', fontSize: 9, letterSpacing: 1,
               padding: '4px 12px', cursor: 'pointer',
               background: view === v ? '#00aacc' : '#0f0f1e',
-              color: view === v ? '#000000' : '#808080',
+              color: view === v ? '#000000' : '#c0c0e0',
               borderTop:    view === v ? '2px solid #ffffff' : '2px solid #404040',
               borderLeft:   view === v ? '2px solid #ffffff' : '2px solid #404040',
               borderRight:  view === v ? '2px solid #404040' : '2px solid #808080',
@@ -441,7 +443,6 @@ export default function PermissionsTab() {
           </button>
         ))}
 
-        {/* Search */}
         <input
           type="text"
           placeholder="Search role, contract, holder or address…"
@@ -449,7 +450,7 @@ export default function PermissionsTab() {
           onChange={e => setSearch(e.target.value)}
           style={{
             flex: 1, fontFamily: 'Courier New, monospace', fontSize: 9,
-            background: '#06060f', color: '#c0c0f0',
+            background: '#06060f', color: '#e0e0ff',
             borderTop: '2px solid #404040', borderLeft: '2px solid #404040',
             borderRight: '2px solid #808080', borderBottom: '2px solid #808080',
             padding: '4px 10px', outline: 'none',
@@ -473,17 +474,17 @@ export default function PermissionsTab() {
         background: '#06060f', border: '1px solid #1a1a3a',
         flexWrap: 'wrap',
       }}>
-        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a' }}>CONCENTRATION:</span>
+        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL }}>CONCENTRATION:</span>
         {[['LOW','#00ff41'],['MEDIUM','#ffcc00'],['HIGH','#ff4444']].map(([l, c]) => (
           <span key={l} style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: c as string }}>● {l}</span>
         ))}
-        <span style={{ color: '#1a1a3a' }}>|</span>
-        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a' }}>TYPE:</span>
+        <span style={{ color: '#2a2a5a' }}>|</span>
+        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL }}>TYPE:</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#00ff41' }}>CONTRACT</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#00ccff' }}>MULTISIG N-of-M</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#ff4444' }}>EOA</span>
-        <span style={{ color: '#1a1a3a' }}>|</span>
-        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#3a3a6a' }}>SECURITY:</span>
+        <span style={{ color: '#2a2a5a' }}>|</span>
+        <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_LABEL }}>SECURITY:</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#00ff41' }}>HIGH</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#ffcc00' }}>MEDIUM</span>
         <span style={{ fontFamily: 'Courier New, monospace', fontSize: 8, color: '#ff4444' }}>LOW</span>
@@ -494,7 +495,7 @@ export default function PermissionsTab() {
         <div>
           {filteredPermissions.map(p => <RoleCard key={p.id} permission={p} />)}
           {filteredPermissions.length === 0 && (
-            <div style={{ color: '#3a3a6a', fontFamily: 'Courier New, monospace', fontSize: 10, textAlign: 'center', marginTop: 40 }}>
+            <div style={{ color: CLR_LABEL, fontFamily: 'Courier New, monospace', fontSize: 10, textAlign: 'center', marginTop: 40 }}>
               No results for "{search}"
             </div>
           )}
@@ -506,7 +507,7 @@ export default function PermissionsTab() {
       {/* Footer */}
       <div style={{
         marginTop: 20, padding: '6px 10px', borderTop: '1px solid #1a1a3a',
-        fontFamily: 'Courier New, monospace', fontSize: 8, color: '#2a2a4a',
+        fontFamily: 'Courier New, monospace', fontSize: 8, color: CLR_FOOTER,
         display: 'flex', justifyContent: 'space-between',
       }}>
         <span>SPARK PROTOCOL — PERMISSION REGISTRY · {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}</span>
